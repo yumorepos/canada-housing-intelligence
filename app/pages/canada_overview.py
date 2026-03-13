@@ -44,9 +44,10 @@ def render_canada_overview(
     c3.metric("Higher Pressure City", insights["highest_pressure_city"])
     c4.metric("Best Data Coverage", insights["strongest_coverage_city"])
 
+    upcoming_display = ", ".join(upcoming_cities) if upcoming_cities else "None"
     st.info(
         f"Live comparisons currently cover **{', '.join(implemented_cities)}**. "
-        f"Upcoming cities: **{', '.join(upcoming_cities)}**."
+        f"Upcoming cities: **{upcoming_display}**."
     )
 
     st.subheader("City Comparison Table")

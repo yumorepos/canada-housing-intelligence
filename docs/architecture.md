@@ -10,8 +10,8 @@ Canada Housing Intelligence stays intentionally lightweight and honest:
 ## National + city architecture
 - `analysis/city_metrics.py` hosts reusable city analytics and Canada comparison helpers.
 - `app/pages/canada_overview.py` is the national product entry point for cross-city tradeoff analysis.
-- `app/pages/city_overview.py` provides a reusable city layout used by Montreal and Toronto.
-- City-specific files (`montreal_overview.py`, `toronto_overview.py`) remain thin identity wrappers.
+- `app/pages/city_overview.py` provides a reusable city layout used by Montreal, Toronto, and Vancouver.
+- City-specific files (`montreal_overview.py`, `toronto_overview.py`, `vancouver_overview.py`) remain thin identity wrappers.
 - `app/main.py` routes first to Canada overview, then city drill-down pages.
 
 ## Module boundaries
@@ -22,7 +22,7 @@ Canada Housing Intelligence stays intentionally lightweight and honest:
 
 ## Data-layer decisions
 ### Data shape
-- Shared schema used for both Montreal and Toronto:
+- Shared schema used for Montreal, Toronto, and Vancouver:
   - `city`, `neighborhood`, `year`, `average_rent`, `median_price`
   - `borough`, `listing_count`, `sales_count`, `coverage_score`, `property_type`
 
@@ -62,4 +62,4 @@ Adding the next city now mostly requires updating config and providing data, rat
 - Dataset remains local/sample and synthetic rather than sourced from authoritative feeds.
 - Guardrails improve trustworthiness but do not make outputs statistically official.
 - National comparison currently includes only implemented cities.
-- Vancouver remains roadmap only.
+- Comparisons are still based on local/sample data and remain directional.

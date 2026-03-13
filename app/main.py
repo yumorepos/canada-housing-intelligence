@@ -10,6 +10,7 @@ import streamlit as st
 from app.pages.canada_overview import render_canada_overview
 from app.pages.montreal_overview import render_montreal_overview
 from app.pages.toronto_overview import render_toronto_overview
+from app.pages.vancouver_overview import render_vancouver_overview
 from app.utils.config import get_city_profiles, get_profiled_cities, load_city_config
 from app.utils.data_loader import load_housing_data
 
@@ -43,12 +44,21 @@ def main() -> None:
     ]
     page = st.sidebar.selectbox("Select experience", page_labels)
 
+    city_renderers = {
+        "Montreal": render_montreal_overview,
+        "Toronto": render_toronto_overview,
+        "Vancouver": render_vancouver_overview,
+    }
+
     if page == "Canada Overview":
         render_canada_overview(data, implemented_profiles=implemented_profiles, upcoming_profiles=upcoming_profiles)
-    elif page == "Montreal Housing Overview":
-        render_montreal_overview(data, profile=profiles["Montreal"])
-    elif page == "Toronto Housing Overview":
-        render_toronto_overview(data, profile=profiles["Toronto"])
+    elif page.endswith("Housing Overview"):
+        city = page.replace(" Housing Overview", "")
+        renderer = city_renderers.get(city)
+        if renderer and city in profiles:
+            renderer(data, profile=profiles[city])
+        else:
+            st.error(f"No renderer configured for {city}.")
     else:
         city = page.replace(" (Coming Soon)", "")
         note = profiles.get(city, {}).get("upcoming_note")

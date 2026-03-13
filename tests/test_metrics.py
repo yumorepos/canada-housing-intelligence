@@ -197,3 +197,23 @@ def test_canada_multi_city_trends_builds_city_year_series():
     assert set(trends["city"]) == {"Montreal", "Toronto"}
     assert "rent_to_price_ratio" in trends.columns
     assert len(trends) == 4
+
+
+def test_sample_dataset_includes_vancouver_with_multi_year_coverage():
+    df = pd.read_csv("data/processed/housing_sample.csv")
+
+    vancouver = df[df["city"] == "Vancouver"]
+    assert not vancouver.empty
+    assert vancouver["year"].nunique() >= 6
+    assert vancouver["neighborhood"].nunique() >= 6
+    assert set(["listing_count", "coverage_score"]).issubset(vancouver.columns)
+
+
+def test_canada_city_comparison_supports_three_live_cities():
+    df = pd.read_csv("data/processed/housing_sample.csv")
+
+    comparison = canada_city_comparison(df, ["Montreal", "Toronto", "Vancouver"])
+
+    assert set(comparison["city"]) == {"Montreal", "Toronto", "Vancouver"}
+    assert comparison["city"].nunique() == 3
+    assert comparison["sample_listings"].min() > 0

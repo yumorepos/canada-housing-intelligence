@@ -152,24 +152,24 @@ Toronto,Downtown,Old Toronto,2021,2641.0,1017051.0,364,109,0.92,all
 Toronto,Downtown,Old Toronto,2022,2779.0,1078075.0,368,110,0.93,all
 Toronto,Downtown,Old Toronto,2023,2923.0,1142759.0,372,111,0.93,all
 Toronto,Downtown,Old Toronto,2024,3075.0,1211325.0,360,108,0.94,all
-Toronto,Liberty Village,Old Toronto,2016,1950.0,720000.0,320,96,0.90,all
+Toronto,Liberty Village,Old Toronto,2016,1950.0,720000.0,320,96,0.9,all
 Toronto,Liberty Village,Old Toronto,2017,2049.0,762480.0,324,97,0.91,all
 Toronto,Liberty Village,Old Toronto,2018,2154.0,807466.0,328,98,0.91,all
 Toronto,Liberty Village,Old Toronto,2019,2264.0,855107.0,332,99,0.92,all
 Toronto,Liberty Village,Old Toronto,2020,2379.0,905558.0,320,96,0.92,all
-Toronto,Liberty Village,Old Toronto,2021,2501.0,958986.0,324,97,0.90,all
+Toronto,Liberty Village,Old Toronto,2021,2501.0,958986.0,324,97,0.9,all
 Toronto,Liberty Village,Old Toronto,2022,2628.0,1015566.0,328,98,0.91,all
 Toronto,Liberty Village,Old Toronto,2023,2762.0,1075485.0,332,99,0.91,all
 Toronto,Liberty Village,Old Toronto,2024,2903.0,1138938.0,320,96,0.92,all
 Toronto,North York Centre,North York,2016,1780.0,690000.0,300,90,0.88,all
 Toronto,North York Centre,North York,2017,1862.0,727950.0,303,90,0.89,all
 Toronto,North York Centre,North York,2018,1948.0,767987.0,306,91,0.89,all
-Toronto,North York Centre,North York,2019,2037.0,810227.0,309,92,0.90,all
-Toronto,North York Centre,North York,2020,2131.0,854789.0,300,90,0.90,all
+Toronto,North York Centre,North York,2019,2037.0,810227.0,309,92,0.9,all
+Toronto,North York Centre,North York,2020,2131.0,854789.0,300,90,0.9,all
 Toronto,North York Centre,North York,2021,2229.0,901802.0,303,90,0.88,all
 Toronto,North York Centre,North York,2022,2331.0,951402.0,306,91,0.89,all
 Toronto,North York Centre,North York,2023,2439.0,1003729.0,309,92,0.89,all
-Toronto,North York Centre,North York,2024,2551.0,1058934.0,300,90,0.90,all
+Toronto,North York Centre,North York,2024,2551.0,1058934.0,300,90,0.9,all
 Toronto,Scarborough Town Centre,Scarborough,2016,1620.0,620000.0,255,76,0.85,all
 Toronto,Scarborough Town Centre,Scarborough,2017,1691.0,651000.0,258,77,0.85,all
 Toronto,Scarborough Town Centre,Scarborough,2018,1766.0,683550.0,261,78,0.86,all
@@ -189,23 +189,23 @@ Toronto,Etobicoke South,Etobicoke,2022,2201.0,876052.0,254,76,0.84,all
 Toronto,Etobicoke South,Etobicoke,2023,2296.0,920730.0,257,77,0.85,all
 Toronto,Etobicoke South,Etobicoke,2024,2395.0,967687.0,248,74,0.85,all
 Toronto,The Beaches,Old Toronto,2016,1890.0,810000.0,188,56,0.79,all
-Toronto,The Beaches,Old Toronto,2017,1975.0,853740.0,190,57,0.80,all
-Toronto,The Beaches,Old Toronto,2018,2064.0,899842.0,192,57,0.80,all
+Toronto,The Beaches,Old Toronto,2017,1975.0,853740.0,190,57,0.8,all
+Toronto,The Beaches,Old Toronto,2018,2064.0,899842.0,192,57,0.8,all
 Toronto,The Beaches,Old Toronto,2019,2157.0,948433.0,194,58,0.81,all
 Toronto,The Beaches,Old Toronto,2020,2254.0,999649.0,188,56,0.81,all
 Toronto,The Beaches,Old Toronto,2021,2355.0,1053630.0,190,57,0.79,all
-Toronto,The Beaches,Old Toronto,2022,2461.0,1110526.0,192,57,0.80,all
-Toronto,The Beaches,Old Toronto,2023,2572.0,1170494.0,194,58,0.80,all
+Toronto,The Beaches,Old Toronto,2022,2461.0,1110526.0,192,57,0.8,all
+Toronto,The Beaches,Old Toronto,2023,2572.0,1170494.0,194,58,0.8,all
 Toronto,The Beaches,Old Toronto,2024,2688.0,1233701.0,188,56,0.81,all
 Toronto,High Park,Old Toronto,2016,1860.0,840000.0,182,55,0.78,all
 Toronto,High Park,Old Toronto,2017,1942.0,884520.0,184,55,0.79,all
 Toronto,High Park,Old Toronto,2018,2027.0,931400.0,186,55,0.79,all
-Toronto,High Park,Old Toronto,2019,2116.0,980764.0,188,56,0.80,all
-Toronto,High Park,Old Toronto,2020,2210.0,1032744.0,182,55,0.80,all
+Toronto,High Park,Old Toronto,2019,2116.0,980764.0,188,56,0.8,all
+Toronto,High Park,Old Toronto,2020,2210.0,1032744.0,182,55,0.8,all
 Toronto,High Park,Old Toronto,2021,2307.0,1087480.0,184,55,0.78,all
 Toronto,High Park,Old Toronto,2022,2408.0,1145116.0,186,55,0.79,all
 Toronto,High Park,Old Toronto,2023,2514.0,1205807.0,188,56,0.79,all
-Toronto,High Park,Old Toronto,2024,2625.0,1269715.0,182,55,0.80,all
+Toronto,High Park,Old Toronto,2024,2625.0,1269715.0,182,55,0.8,all
 Toronto,Leslieville,Old Toronto,2016,1820.0,770000.0,210,63,0.82,all
 Toronto,Leslieville,Old Toronto,2017,1907.0,813890.0,212,63,0.82,all
 Toronto,Leslieville,Old Toronto,2018,1999.0,860282.0,214,64,0.83,all
@@ -242,12 +242,102 @@ Toronto,Parkdale,Old Toronto,2021,2020.0,855544.0,173,55,0.74,all
 Toronto,Parkdale,Old Toronto,2022,2100.0,895755.0,174,55,0.74,all
 Toronto,Parkdale,Old Toronto,2023,2184.0,937855.0,175,55,0.75,all
 Toronto,Parkdale,Old Toronto,2024,2272.0,981934.0,172,55,0.76,all
-Toronto,East York,East York,2016,1580.0,640000.0,146,55,0.70,all
-Toronto,East York,East York,2017,1642.0,669440.0,147,55,0.70,all
+Toronto,East York,East York,2016,1580.0,640000.0,146,55,0.7,all
+Toronto,East York,East York,2017,1642.0,669440.0,147,55,0.7,all
 Toronto,East York,East York,2018,1706.0,700234.0,148,55,0.71,all
 Toronto,East York,East York,2019,1772.0,732445.0,149,55,0.71,all
 Toronto,East York,East York,2020,1841.0,766137.0,146,55,0.72,all
-Toronto,East York,East York,2021,1913.0,801380.0,147,55,0.70,all
-Toronto,East York,East York,2022,1988.0,838243.0,148,55,0.70,all
+Toronto,East York,East York,2021,1913.0,801380.0,147,55,0.7,all
+Toronto,East York,East York,2022,1988.0,838243.0,148,55,0.7,all
 Toronto,East York,East York,2023,2065.0,876802.0,149,55,0.71,all
 Toronto,East York,East York,2024,2146.0,917135.0,146,55,0.71,all
+Vancouver,Kitsilano,West Side,2016,2159.0,926440.0,226,93,0.89,all
+Vancouver,Kitsilano,West Side,2017,2217.0,961400.0,218,98,0.89,all
+Vancouver,Kitsilano,West Side,2018,2300.0,1005560.0,231,94,0.9,all
+Vancouver,Kitsilano,West Side,2019,2359.0,1058920.0,223,100,0.9,all
+Vancouver,Kitsilano,West Side,2020,2442.0,1093880.0,236,96,0.9,all
+Vancouver,Kitsilano,West Side,2021,2500.0,1138040.0,229,102,0.9,all
+Vancouver,Kitsilano,West Side,2022,2584.0,1191400.0,241,98,0.91,all
+Vancouver,Kitsilano,West Side,2023,2642.0,1226360.0,234,104,0.91,all
+Vancouver,Kitsilano,West Side,2024,2726.0,1270520.0,247,100,0.91,all
+Vancouver,Mount Pleasant,East Side,2016,2058.0,866020.0,211,86,0.87,all
+Vancouver,Mount Pleasant,East Side,2017,2114.0,898700.0,203,91,0.87,all
+Vancouver,Mount Pleasant,East Side,2018,2194.0,939980.0,215,87,0.88,all
+Vancouver,Mount Pleasant,East Side,2019,2249.0,989860.0,208,93,0.88,all
+Vancouver,Mount Pleasant,East Side,2020,2329.0,1022540.0,220,89,0.88,all
+Vancouver,Mount Pleasant,East Side,2021,2384.0,1063820.0,213,95,0.88,all
+Vancouver,Mount Pleasant,East Side,2022,2464.0,1113700.0,225,91,0.89,all
+Vancouver,Mount Pleasant,East Side,2023,2519.0,1146380.0,218,97,0.89,all
+Vancouver,Mount Pleasant,East Side,2024,2599.0,1187660.0,230,93,0.89,all
+Vancouver,Downtown,Downtown,2016,2410.0,996930.0,266,108,0.91,all
+Vancouver,Downtown,Downtown,2017,2474.0,1034550.0,259,114,0.91,all
+Vancouver,Downtown,Downtown,2018,2568.0,1082070.0,272,110,0.92,all
+Vancouver,Downtown,Downtown,2019,2633.0,1139490.0,265,116,0.92,all
+Vancouver,Downtown,Downtown,2020,2726.0,1177110.0,278,112,0.92,all
+Vancouver,Downtown,Downtown,2021,2791.0,1224630.0,271,118,0.92,all
+Vancouver,Downtown,Downtown,2022,2885.0,1282050.0,284,114,0.93,all
+Vancouver,Downtown,Downtown,2023,2950.0,1319670.0,277,120,0.93,all
+Vancouver,Downtown,Downtown,2024,3043.0,1367190.0,290,116,0.93,all
+Vancouver,Yaletown,Downtown,2016,2510.0,1037210.0,256,102,0.92,all
+Vancouver,Yaletown,Downtown,2017,2578.0,1076350.0,249,108,0.92,all
+Vancouver,Yaletown,Downtown,2018,2675.0,1125790.0,262,104,0.93,all
+Vancouver,Yaletown,Downtown,2019,2742.0,1185530.0,255,110,0.93,all
+Vancouver,Yaletown,Downtown,2020,2840.0,1224670.0,268,106,0.93,all
+Vancouver,Yaletown,Downtown,2021,2908.0,1274110.0,261,112,0.93,all
+Vancouver,Yaletown,Downtown,2022,3005.0,1333850.0,274,108,0.94,all
+Vancouver,Yaletown,Downtown,2023,3073.0,1372990.0,267,114,0.94,all
+Vancouver,Yaletown,Downtown,2024,3170.0,1422430.0,280,110,0.94,all
+Vancouver,West End,Downtown,2016,2309.0,946580.0,241,97,0.9,all
+Vancouver,West End,Downtown,2017,2371.0,982300.0,233,102,0.9,all
+Vancouver,West End,Downtown,2018,2461.0,1027420.0,246,98,0.91,all
+Vancouver,West End,Downtown,2019,2523.0,1081940.0,239,104,0.91,all
+Vancouver,West End,Downtown,2020,2613.0,1117660.0,252,100,0.91,all
+Vancouver,West End,Downtown,2021,2675.0,1162780.0,245,106,0.91,all
+Vancouver,West End,Downtown,2022,2765.0,1217300.0,257,102,0.92,all
+Vancouver,West End,Downtown,2023,2827.0,1253020.0,250,108,0.92,all
+Vancouver,West End,Downtown,2024,2916.0,1298140.0,263,104,0.92,all
+Vancouver,Commercial Drive,East Side,2016,1958.0,815670.0,191,78,0.84,all
+Vancouver,Commercial Drive,East Side,2017,2010.0,846450.0,183,83,0.84,all
+Vancouver,Commercial Drive,East Side,2018,2086.0,885330.0,195,79,0.85,all
+Vancouver,Commercial Drive,East Side,2019,2139.0,932310.0,187,85,0.85,all
+Vancouver,Commercial Drive,East Side,2020,2215.0,963090.0,199,81,0.85,all
+Vancouver,Commercial Drive,East Side,2021,2268.0,1001970.0,192,87,0.85,all
+Vancouver,Commercial Drive,East Side,2022,2344.0,1048950.0,204,82,0.86,all
+Vancouver,Commercial Drive,East Side,2023,2397.0,1079730.0,196,88,0.86,all
+Vancouver,Commercial Drive,East Side,2024,2473.0,1118610.0,208,84,0.86,all
+Vancouver,Kerrisdale,West Side,2016,2209.0,976790.0,181,74,0.86,all
+Vancouver,Kerrisdale,West Side,2017,2268.0,1013650.0,173,79,0.86,all
+Vancouver,Kerrisdale,West Side,2018,2354.0,1060210.0,185,75,0.87,all
+Vancouver,Kerrisdale,West Side,2019,2413.0,1116470.0,177,81,0.87,all
+Vancouver,Kerrisdale,West Side,2020,2499.0,1153330.0,189,77,0.87,all
+Vancouver,Kerrisdale,West Side,2021,2559.0,1199890.0,181,82,0.87,all
+Vancouver,Kerrisdale,West Side,2022,2644.0,1256150.0,193,78,0.88,all
+Vancouver,Kerrisdale,West Side,2023,2704.0,1293010.0,185,84,0.88,all
+Vancouver,Kerrisdale,West Side,2024,2790.0,1339570.0,197,80,0.88,all
+Vancouver,Marpole,South Vancouver,2016,1908.0,785460.0,171,70,0.82,all
+Vancouver,Marpole,South Vancouver,2017,1959.0,815100.0,162,75,0.82,all
+Vancouver,Marpole,South Vancouver,2018,2033.0,852540.0,174,71,0.83,all
+Vancouver,Marpole,South Vancouver,2019,2084.0,897780.0,166,77,0.83,all
+Vancouver,Marpole,South Vancouver,2020,2158.0,927420.0,178,72,0.83,all
+Vancouver,Marpole,South Vancouver,2021,2210.0,964860.0,170,78,0.83,all
+Vancouver,Marpole,South Vancouver,2022,2284.0,1010100.0,182,74,0.84,all
+Vancouver,Marpole,South Vancouver,2023,2335.0,1039740.0,174,80,0.84,all
+Vancouver,Marpole,South Vancouver,2024,2409.0,1077180.0,186,75,0.84,all
+Vancouver,Renfrew-Collingwood,East Side,2016,1857.0,745180.0,156,66,0.79,all
+Vancouver,Renfrew-Collingwood,East Side,2017,1907.0,773300.0,147,71,0.79,all
+Vancouver,Renfrew-Collingwood,East Side,2018,1980.0,808820.0,159,67,0.8,all
+Vancouver,Renfrew-Collingwood,East Side,2019,2029.0,851740.0,151,73,0.8,all
+Vancouver,Renfrew-Collingwood,East Side,2020,2102.0,879860.0,163,68,0.8,all
+Vancouver,Renfrew-Collingwood,East Side,2021,2152.0,915380.0,155,74,0.8,all
+Vancouver,Renfrew-Collingwood,East Side,2022,2224.0,958300.0,166,70,0.81,all
+Vancouver,Renfrew-Collingwood,East Side,2023,2274.0,986420.0,158,75,0.81,all
+Vancouver,Renfrew-Collingwood,East Side,2024,2346.0,1021940.0,170,71,0.81,all
+Vancouver,South Cambie,West Side,2016,2108.0,906300.0,151,62,0.75,all
+Vancouver,South Cambie,West Side,2017,2165.0,940500.0,142,67,0.75,all
+Vancouver,South Cambie,West Side,2018,2247.0,983700.0,154,63,0.76,all
+Vancouver,South Cambie,West Side,2019,2304.0,1035900.0,146,68,0.76,all
+Vancouver,South Cambie,West Side,2020,2386.0,1070100.0,157,64,0.76,all
+Vancouver,South Cambie,West Side,2021,2442.0,1113300.0,149,70,0.76,all
+Vancouver,South Cambie,West Side,2022,2524.0,1165500.0,161,65,0.77,all
+Vancouver,South Cambie,West Side,2023,2581.0,1199700.0,153,71,0.77,all
+Vancouver,South Cambie,West Side,2024,2663.0,1242900.0,164,67,0.77,all

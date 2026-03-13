@@ -35,9 +35,13 @@ cities:
 
   Vancouver:
     display_name: Vancouver
-    status: coming_soon
-    enabled: false
+    status: live
+    enabled: true
     dataset_path: data/processed/housing_sample.csv
-    subtitle: Coming soon.
-    canada_positioning: Planned west-coast comparison addition once city coverage is implemented.
-    upcoming_note: Vancouver integration is not yet implemented in this local-first sample product.
+    subtitle: >-
+      Decision-support view for rental and ownership pressure in Vancouver.
+      Insights are generated from the local sample dataset in this repository.
+    canada_positioning: Highest ownership entry costs in this sample with resilient rental demand.
+    chart_labels:
+      rent: Avg Monthly Rent
+      price: Avg Median Price

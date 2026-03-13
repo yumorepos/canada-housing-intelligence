@@ -46,5 +46,14 @@ def test_get_profiled_cities_separates_live_and_upcoming():
 
     implemented, upcoming = get_profiled_cities(config)
 
-    assert {city["city"] for city in implemented} == {"Montreal", "Toronto"}
-    assert {city["city"] for city in upcoming} == {"Vancouver"}
+    assert {city["city"] for city in implemented} == {"Montreal", "Toronto", "Vancouver"}
+    assert {city["city"] for city in upcoming} == set()
+
+
+def test_vancouver_profile_is_live_and_enabled():
+    config = load_city_config()
+    profiles = get_city_profiles(config)
+
+    assert profiles["Vancouver"]["status"] == "live"
+    assert profiles["Vancouver"]["enabled"] is True
+    assert profiles["Vancouver"]["guardrails"]["min_years"] >= 6
