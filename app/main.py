@@ -1,8 +1,16 @@
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 import streamlit as st
 
+from app.pages.canada_overview import render_canada_overview
 from app.pages.montreal_overview import render_montreal_overview
 from app.pages.toronto_overview import render_toronto_overview
-from app.utils.config import load_city_config
+from app.utils.config import get_city_profiles, get_profiled_cities, load_city_config
 from app.utils.data_loader import load_housing_data
 
 
@@ -11,30 +19,41 @@ def main() -> None:
 
     st.title("Canada Housing Intelligence")
     st.write(
-        "Flagship housing analytics product for Canadian cities. Montreal and Toronto are now implemented city "
-        "intelligence views, with Vancouver staged for expansion."
+        "National housing intelligence product for Canadian cities. Start with Canada-wide comparison, "
+        "then drill into implemented city intelligence views."
     )
 
     config = load_city_config()
-    cities = config["supported_cities"]
+    profiles = get_city_profiles(config)
+    implemented_profiles, upcoming_profiles = get_profiled_cities(config)
 
-    data = load_housing_data(config["dataset_path"])
+    dataset_path = config["shared_defaults"]["dataset_path"]
+    data = load_housing_data(dataset_path)
 
-    implemented = [name for name, city_cfg in cities.items() if city_cfg["status"] == "live"]
-    upcoming = [name for name, city_cfg in cities.items() if city_cfg["status"] != "live"]
+    implemented_names = [profile["city"] for profile in implemented_profiles]
+    upcoming_names = [profile["city"] for profile in upcoming_profiles]
 
-    st.caption(f"Implemented cities: **{', '.join(implemented)}**. Upcoming: **{', '.join(upcoming)}**.")
+    st.caption(
+        f"Implemented cities: **{', '.join(implemented_names)}**. "
+        f"Upcoming: **{', '.join(upcoming_names) if upcoming_names else 'None'}**."
+    )
 
-    page_labels = [f"{city} Housing Overview" for city in implemented] + [f"{city} (Coming Soon)" for city in upcoming]
-    page = st.sidebar.selectbox("Select city view", page_labels)
+    page_labels = ["Canada Overview"] + [f"{city} Housing Overview" for city in implemented_names] + [
+        f"{city} (Coming Soon)" for city in upcoming_names
+    ]
+    page = st.sidebar.selectbox("Select experience", page_labels)
 
-    if page == "Montreal Housing Overview":
-        render_montreal_overview(data)
+    if page == "Canada Overview":
+        render_canada_overview(data, implemented_profiles=implemented_profiles, upcoming_profiles=upcoming_profiles)
+    elif page == "Montreal Housing Overview":
+        render_montreal_overview(data, profile=profiles["Montreal"])
     elif page == "Toronto Housing Overview":
-        render_toronto_overview(data)
+        render_toronto_overview(data, profile=profiles["Toronto"])
     else:
-        st.header("Vancouver")
-        st.warning("Vancouver integration is not yet implemented in this local-first sample product.")
+        city = page.replace(" (Coming Soon)", "")
+        note = profiles.get(city, {}).get("upcoming_note")
+        st.header(city)
+        st.warning(note or "This city is not yet implemented in this local-first sample product.")
 
 
 if __name__ == "__main__":
