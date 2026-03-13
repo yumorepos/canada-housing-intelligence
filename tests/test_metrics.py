@@ -2,6 +2,9 @@ import pandas as pd
 
 from analysis.city_metrics import (
     calculate_city_kpis,
+    canada_city_comparison,
+    canada_comparison_insights,
+    canada_multi_city_trends,
     clean_housing_data,
     leader_laggard_summary,
     neighborhood_affordability_snapshot,
@@ -137,3 +140,60 @@ def test_multi_city_logic_keeps_city_scopes_independent():
     assert montreal_kpis["latest_avg_rent"] == 1500
     assert toronto_kpis["latest_avg_rent"] == 2300
     assert toronto_kpis["latest_avg_price"] > montreal_kpis["latest_avg_price"]
+
+
+def test_canada_city_comparison_returns_decision_fields():
+    df = pd.DataFrame(
+        {
+            "city": ["Montreal", "Montreal", "Toronto", "Toronto"],
+            "neighborhood": ["A", "A", "A", "A"],
+            "year": [2023, 2024, 2023, 2024],
+            "average_rent": [1500, 1600, 2300, 2400],
+            "median_price": [550000, 575000, 850000, 890000],
+            "listing_count": [200, 210, 300, 320],
+            "coverage_score": [0.8, 0.82, 0.9, 0.91],
+        }
+    )
+
+    comparison = canada_city_comparison(df, ["Montreal", "Toronto"])
+
+    assert list(comparison["city"]) == ["Montreal", "Toronto"]
+    assert set(["rent_rank_affordable", "price_rank_affordable", "pressure_rank"]).issubset(comparison.columns)
+    assert comparison.loc[comparison["city"] == "Montreal", "rent_rank_affordable"].iloc[0] == 1
+
+
+def test_canada_comparison_insights_identify_tradeoffs():
+    comparison = pd.DataFrame(
+        {
+            "city": ["Montreal", "Toronto"],
+            "avg_monthly_rent": [1600.0, 2400.0],
+            "avg_median_price": [575000.0, 890000.0],
+            "rent_growth_pct": [8.0, 12.0],
+            "price_growth_pct": [10.0, 14.0],
+            "avg_coverage_pct": [82.0, 91.0],
+        }
+    )
+
+    insights = canada_comparison_insights(comparison)
+
+    assert insights["most_affordable_rent_city"] == "Montreal"
+    assert insights["highest_pressure_city"] == "Toronto"
+    assert insights["affordability_gap_rent"] == 800.0
+
+
+def test_canada_multi_city_trends_builds_city_year_series():
+    df = pd.DataFrame(
+        {
+            "city": ["Montreal", "Montreal", "Toronto", "Toronto", "Calgary"],
+            "neighborhood": ["A", "A", "A", "A", "A"],
+            "year": [2023, 2024, 2023, 2024, 2024],
+            "average_rent": [1500, 1600, 2300, 2400, 1800],
+            "median_price": [550000, 575000, 850000, 890000, 700000],
+        }
+    )
+
+    trends = canada_multi_city_trends(df, ["Montreal", "Toronto"])
+
+    assert set(trends["city"]) == {"Montreal", "Toronto"}
+    assert "rent_to_price_ratio" in trends.columns
+    assert len(trends) == 4

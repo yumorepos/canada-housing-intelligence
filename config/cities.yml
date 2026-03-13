@@ -1,14 +1,43 @@
-primary_city: Montreal
-dataset_path: data/processed/housing_sample.csv
-supported_cities:
+primary_experience: canada_overview
+shared_defaults:
+  dataset_path: data/processed/housing_sample.csv
+  guardrails:
+    min_years: 6
+    min_avg_listings: 150
+    min_avg_coverage: 0.72
+
+cities:
   Montreal:
-    enabled: true
+    display_name: Montreal
     status: live
-    page_module: app.pages.montreal_overview
+    enabled: true
+    dataset_path: data/processed/housing_sample.csv
+    subtitle: >-
+      Decision-support view for rental and ownership pressure in Montreal.
+      Insights are generated from the local sample dataset in this repository.
+    canada_positioning: Balanced affordability with moderate growth pressure.
+    chart_labels:
+      rent: Avg Monthly Rent
+      price: Avg Median Price
+
   Toronto:
-    enabled: true
+    display_name: Toronto
     status: live
-    page_module: app.pages.toronto_overview
+    enabled: true
+    dataset_path: data/processed/housing_sample.csv
+    subtitle: >-
+      Decision-support view for rental and ownership pressure in Toronto.
+      Insights are generated from the local sample dataset in this repository.
+    canada_positioning: Higher cost profile with stronger market pressure signals.
+    chart_labels:
+      rent: Avg Monthly Rent
+      price: Avg Median Price
+
   Vancouver:
-    enabled: false
+    display_name: Vancouver
     status: coming_soon
+    enabled: false
+    dataset_path: data/processed/housing_sample.csv
+    subtitle: Coming soon.
+    canada_positioning: Planned west-coast comparison addition once city coverage is implemented.
+    upcoming_note: Vancouver integration is not yet implemented in this local-first sample product.

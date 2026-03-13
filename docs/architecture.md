@@ -7,15 +7,16 @@ Canada Housing Intelligence stays intentionally lightweight and honest:
 - clear separation between UI composition and analytical logic
 - recruiter-grade storytelling layered on top of reproducible metrics
 
-## Multi-city architecture
-- `analysis/city_metrics.py` now hosts reusable city analytics for all implemented cities.
-- `analysis/montreal.py` remains as a compatibility shim, forwarding to shared analysis helpers.
-- `app/pages/city_overview.py` provides a reusable recruiter-facing city page layout.
-- City-specific page files (`montreal_overview.py`, `toronto_overview.py`) only provide city identity + narrative subtitle.
+## National + city architecture
+- `analysis/city_metrics.py` hosts reusable city analytics and Canada comparison helpers.
+- `app/pages/canada_overview.py` is the national product entry point for cross-city tradeoff analysis.
+- `app/pages/city_overview.py` provides a reusable city layout used by Montreal and Toronto.
+- City-specific files (`montreal_overview.py`, `toronto_overview.py`) remain thin identity wrappers.
+- `app/main.py` routes first to Canada overview, then city drill-down pages.
 
 ## Module boundaries
 - `app/`: Streamlit UI layout and page routing.
-- `analysis/`: reusable analytics (KPIs, growth rankings, affordability, volatility, confidence guardrails).
+- `analysis/`: reusable analytics (KPIs, growth rankings, affordability, volatility, guardrails, Canada comparisons).
 - `app/utils/`: thin wrappers for config loading and file-based data loading.
 - `data/processed/`: app-ready local datasets.
 
@@ -27,7 +28,7 @@ Canada Housing Intelligence stays intentionally lightweight and honest:
 
 ### Guardrails
 Implemented in shared analysis logic and kept out of UI:
-- ranking eligibility thresholds:
+- neighborhood ranking eligibility thresholds:
   - minimum years observed
   - minimum average listing count
   - minimum average coverage score
@@ -36,7 +37,29 @@ Implemented in shared analysis logic and kept out of UI:
   - `directional`
 - coverage summaries for UI-level caveats without warning overload
 
+### Canada comparison layer
+Implemented as analysis helpers so UI stays presentation-only:
+- `canada_city_comparison`: builds normalized city comparison rows from existing KPI logic
+- `canada_comparison_insights`: emits concise tradeoff signals used in executive notes
+- `canada_multi_city_trends`: builds annual city-level trend series for comparison charts
+
+
+## City profile config layer
+- `config/cities.yml` centralizes per-city metadata and settings (status, subtitles, Canada notes, dataset path, guardrails).
+- `app/utils/config.py` validates and normalizes profiles so UI modules consume a stable shape.
+- `app/main.py` uses config-derived city profiles for navigation and coming-soon behavior.
+- City wrappers stay intentionally thin (`montreal_overview.py`, `toronto_overview.py`) and delegate rendering + thresholds to shared page logic.
+
+### Why this helps scaling
+Adding the next city now mostly requires updating config and providing data, rather than embedding city-specific copy/thresholds in page code.
+
+
+## Runtime import behavior
+- Streamlit runs `app/main.py` and can execute files under `app/pages/` as standalone scripts in multipage mode.
+- Each executable page module includes a minimal path bootstrap to ensure repo-root modules (`app.*`, `analysis.*`) resolve consistently when launched with `streamlit run app/main.py` from repo root.
+
 ## Honest limitations
 - Dataset remains local/sample and synthetic rather than sourced from authoritative feeds.
 - Guardrails improve trustworthiness but do not make outputs statistically official.
+- National comparison currently includes only implemented cities.
 - Vancouver remains roadmap only.

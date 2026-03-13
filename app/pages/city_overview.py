@@ -1,3 +1,10 @@
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 import pandas as pd
 import streamlit as st
 
@@ -24,14 +31,23 @@ def _leader_caption(summary: dict, label: str) -> str:
     )
 
 
-def render_city_overview(data: pd.DataFrame, city: str, subtitle: str) -> None:
+def render_city_overview(
+    data: pd.DataFrame, city: str, subtitle: str, guardrails: dict | None = None
+) -> None:
     st.header(f"{city} Market Intelligence")
     st.caption(subtitle)
 
     kpis = calculate_city_kpis(data, city=city)
     yearly = city_yearly_summary(data, city=city)
     snapshot = neighborhood_affordability_snapshot(data, city=city)
-    rankings = neighborhood_growth_rankings(data, city=city)
+    guardrails = guardrails or {}
+    rankings = neighborhood_growth_rankings(
+        data,
+        city=city,
+        min_years=int(guardrails.get("min_years", 6)),
+        min_avg_listings=int(guardrails.get("min_avg_listings", 150)),
+        min_avg_coverage=float(guardrails.get("min_avg_coverage", 0.72)),
+    )
 
     coverage = ranking_coverage_summary(rankings)
     robust_rankings = rankings[rankings["is_robust"]]
