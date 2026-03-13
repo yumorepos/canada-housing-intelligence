@@ -14,11 +14,23 @@ def test_load_city_config_requires_cities(tmp_path: Path):
         load_city_config(str(config_path))
 
 
+def test_load_city_config_requires_fallback_dataset(tmp_path: Path):
+    config_path = tmp_path / "cities.yml"
+    config_path.write_text("""shared_defaults:
+  dataset_path: data.csv
+cities: {}
+""", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="fallback_dataset_path"):
+        load_city_config(str(config_path))
+
+
 def test_get_city_profiles_applies_guardrail_defaults(tmp_path: Path):
     config_path = tmp_path / "cities.yml"
     payload = {
         "shared_defaults": {
             "dataset_path": "data.csv",
+            "fallback_dataset_path": "sample.csv",
             "guardrails": {"min_years": 5, "min_avg_listings": 120, "min_avg_coverage": 0.7},
         },
         "cities": {

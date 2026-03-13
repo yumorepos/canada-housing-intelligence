@@ -19,11 +19,15 @@ def render_canada_overview(
     data: pd.DataFrame,
     implemented_profiles: list[dict],
     upcoming_profiles: list[dict],
+    provenance: dict | None = None,
 ) -> None:
     st.header("Canada Market Comparison")
+    provenance = provenance or {}
+    mode = provenance.get("data_mode", "sample")
+    mode_label = "source-backed processed data" if mode == "source_backed" else "local sample data"
     st.caption(
-        "National comparison layer for currently implemented cities. Values are based on the local/sample "
-        "dataset shipped with this repository and should be treated as directional intelligence."
+        "National comparison layer for currently implemented cities. Values are based on "
+        f"{mode_label} and should be treated as directional intelligence."
     )
 
     implemented_cities = [profile["city"] for profile in implemented_profiles]
@@ -117,6 +121,8 @@ def render_canada_overview(
     st.markdown(
         "- **Pressure signal:** We define pressure as combined rent and price growth over time to show where household cost stress "
         "is building faster.\n"
-        "- **Honest scope:** This is a local/sample intelligence layer with support and coverage guardrails, not an authoritative "
-        "national benchmark feed."
+        f"- **Data provenance:** source is **{provenance.get('source_name', 'unknown')}** "
+        f"({provenance.get('source_type', 'unknown')}) for period **{provenance.get('source_period', 'unknown')}**.\n"
+        "- **Honest scope:** This remains a local-first intelligence layer with support and coverage guardrails, not an "
+        "authoritative national benchmark feed."
     )

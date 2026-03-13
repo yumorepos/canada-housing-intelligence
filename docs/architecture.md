@@ -3,63 +3,53 @@
 ## Product direction
 Canada Housing Intelligence stays intentionally lightweight and honest:
 - no external services required to run
-- no fake production infrastructure
+- no cloud pipeline or orchestration
 - clear separation between UI composition and analytical logic
-- recruiter-grade storytelling layered on top of reproducible metrics
+- explicit provenance and mode signaling to improve trust
 
 ## National + city architecture
 - `analysis/city_metrics.py` hosts reusable city analytics and Canada comparison helpers.
-- `app/pages/canada_overview.py` is the national product entry point for cross-city tradeoff analysis.
+- `app/pages/canada_overview.py` is the national entry point for cross-city tradeoff analysis.
 - `app/pages/city_overview.py` provides a reusable city layout used by Montreal, Toronto, and Vancouver.
-- City-specific files (`montreal_overview.py`, `toronto_overview.py`, `vancouver_overview.py`) remain thin identity wrappers.
-- `app/main.py` routes first to Canada overview, then city drill-down pages.
+- City-specific files remain thin wrappers.
+- `app/main.py` routes to Canada overview first, then city pages.
 
-## Module boundaries
-- `app/`: Streamlit UI layout and page routing.
-- `analysis/`: reusable analytics (KPIs, growth rankings, affordability, volatility, guardrails, Canada comparisons).
-- `app/utils/`: thin wrappers for config loading and file-based data loading.
-- `data/processed/`: app-ready local datasets.
+## Data architecture: raw -> processed -> app
+### Raw layer (manual local drop)
+- Directory: `data/raw/`
+- Team can place externally sourced CSV extracts here.
 
-## Data-layer decisions
-### Data shape
-- Shared schema used for Montreal, Toronto, and Vancouver:
-  - `city`, `neighborhood`, `year`, `average_rent`, `median_price`
-  - `borough`, `listing_count`, `sales_count`, `coverage_score`, `property_type`
+### Processing layer
+- `app/utils/ingestion.py` handles transformation and provenance enrichment.
+- `scripts/process_housing_raw.py` is a lightweight CLI wrapper for raw-to-processed generation.
+- Output defaults to `data/processed/housing_source_processed.csv`.
 
-### Guardrails
-Implemented in shared analysis logic and kept out of UI:
-- neighborhood ranking eligibility thresholds:
-  - minimum years observed
-  - minimum average listing count
-  - minimum average coverage score
-- explicit support classification:
-  - `robust`
-  - `directional`
-- coverage summaries for UI-level caveats without warning overload
+### App read layer
+- `app/utils/data_loader.py` loads the primary processed dataset and falls back to `data/processed/housing_sample.csv` when needed.
+- Loader returns both cleaned data and compact provenance metadata for UI display.
 
-### Canada comparison layer
-Implemented as analysis helpers so UI stays presentation-only:
-- `canada_city_comparison`: builds normalized city comparison rows from existing KPI logic
-- `canada_comparison_insights`: emits concise tradeoff signals used in executive notes
-- `canada_multi_city_trends`: builds annual city-level trend series for comparison charts
+## Data model
+### Core analysis fields
+- `city`, `neighborhood`, `year`, `average_rent`, `median_price`
+- `borough`, `listing_count`, `sales_count`, `coverage_score`, `property_type`
 
+### Provenance fields
+- `source_name`, `source_type`, `source_period`, `processed_at`
+- `coverage_note`, `confidence_note`, `data_mode`
 
-## City profile config layer
-- `config/cities.yml` centralizes per-city metadata and settings (status, subtitles, Canada notes, dataset path, guardrails).
-- `app/utils/config.py` validates and normalizes profiles so UI modules consume a stable shape.
-- `app/main.py` uses config-derived city profiles for navigation and coming-soon behavior.
-- City wrappers stay intentionally thin (`montreal_overview.py`, `toronto_overview.py`) and delegate rendering + thresholds to shared page logic.
+Analysis functions remain compatible because they require only core fields and ignore extra metadata columns.
 
-### Why this helps scaling
-Adding the next city now mostly requires updating config and providing data, rather than embedding city-specific copy/thresholds in page code.
+## Guardrails and trust
+Implemented in shared analysis logic and kept out of UI business logic:
+- minimum years observed
+- minimum average listing count
+- minimum average coverage score
+- robust vs directional support tiering
 
-
-## Runtime import behavior
-- Streamlit runs `app/main.py` and can execute files under `app/pages/` as standalone scripts in multipage mode.
-- Each executable page module includes a minimal path bootstrap to ensure repo-root modules (`app.*`, `analysis.*`) resolve consistently when launched with `streamlit run app/main.py` from repo root.
+UI now adds concise provenance context (mode/source/period) without noisy warnings.
 
 ## Honest limitations
-- Dataset remains local/sample and synthetic rather than sourced from authoritative feeds.
-- Guardrails improve trustworthiness but do not make outputs statistically official.
-- National comparison currently includes only implemented cities.
-- Comparisons are still based on local/sample data and remain directional.
+- ingestion is manual local-first, not automated
+- provenance is row-level static metadata today
+- source-backed credibility depends on external file quality and user discipline
+- no built-in schema versioning yet

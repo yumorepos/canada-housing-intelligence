@@ -1,83 +1,78 @@
 # Canada Housing Intelligence
 
 Canada Housing Intelligence is a recruiter-facing, local-first housing analytics product focused on making market shifts understandable in seconds.
-The app now opens on a real Canada comparison page, with Montreal, Toronto, and Vancouver available as drill-down city experiences.
+The app opens on a Canada comparison page, with Montreal, Toronto, and Vancouver as live city drill-downs.
 
 ## What This Repository Is
 - A **local-first** analytics foundation that runs without external infrastructure.
 - A **Streamlit product UI** with a national comparison entry point and city intelligence pages.
-- A modular codebase designed to scale city-by-city without large rewrites.
+- A practical **source-backed ingestion path** that still supports sample-data fallback.
 
 ## Current Product Capabilities
 ### Canada overview (national comparison layer)
-- **Decision snapshot metrics**
-  - lower-rent city and lower-price city
-  - higher-pressure city (combined rent/price growth signal)
-  - strongest latest-year data coverage city
-- **Cross-city comparison table**
-  - latest average rent, median price, rent/price growth, affordability ratio, coverage %, listing samples
-- **High-value visuals**
-  - affordability now (rent vs price by city)
-  - pressure comparison (rent growth vs price growth)
-  - city-level affordability trend divergence over time (rent-to-price ratio)
-- **Analyst notes with explicit scope caveat**
-  - clear reminder that comparisons are directional and based on local/sample data
+- Decision snapshot metrics (lower-rent city, lower-price city, pressure, coverage)
+- Cross-city comparison table (rent, price, growth, affordability ratio, coverage, listing samples)
+- Cross-city visuals and analyst notes
 
 ### City drill-downs (Montreal + Toronto + Vancouver)
 Each implemented city includes:
-- executive snapshot KPIs
+- executive KPI snapshot
 - market trajectory charts
 - neighborhood momentum with robustness guardrails
-- current affordability positioning table + scatter
+- affordability snapshot table + scatter
 - concise analyst notes
 
-## Local Dataset (sample, not official)
-`data/processed/housing_sample.csv` contains local sample records for Montreal, Toronto, and Vancouver.
+## Data Workflow (Local-first, source-backed)
+### Processed datasets used by the app
+- Primary processed path: `data/processed/housing_source_processed.csv`
+- Fallback processed path: `data/processed/housing_sample.csv`
 
-Fields used by analysis:
-- `city`, `neighborhood`, `year`, `average_rent`, `median_price`
-- `borough` (grouping for interpretation and visuals)
-- `listing_count` (sample support proxy)
-- `sales_count` (supplemental context)
-- `coverage_score` (0-1 local confidence proxy)
-- `property_type` (currently `all`, reserved for later segmentation)
+If the primary source-backed processed file is missing, the app automatically falls back to sample data so local usability remains intact.
 
-Guardrails for neighborhood rankings:
-- minimum years observed
-- minimum average listing support
-- minimum average coverage score
+### Ingestion flow
+1. Drop a raw CSV into `data/raw/` (manual local workflow).
+2. Run:
+   ```bash
+   python scripts/process_housing_raw.py \
+     --raw data/raw/<your_file>.csv \
+     --out data/processed/housing_source_processed.csv \
+     --source-name "<source name>" \
+     --source-type "manual_csv_drop" \
+     --source-period "2018-2024"
+   ```
+3. Launch app:
+   ```bash
+   streamlit run app/main.py
+   ```
 
-Neighborhoods failing thresholds are retained as directional context, but excluded from robust leader/laggard callouts.
+Transformation logic is in `app/utils/ingestion.py` and validates required columns before writing app-compatible output.
 
-All insights are derived from a local sample dataset and should be treated as directional, not official citywide estimates.
+## Provenance fields
+Processed rows can include:
+- `source_name`
+- `source_type`
+- `source_period`
+- `processed_at`
+- `coverage_note`
+- `confidence_note`
+- `data_mode` (`source_backed` for processed source outputs)
+
+The UI surfaces compact provenance context (data mode + source + period) without warning spam.
 
 ## Repository Structure
 ```text
 app/                Streamlit app
   pages/            Canada and city-facing UI modules
-  utils/            Config and data access helpers
+  utils/            Config, ingestion, and data access helpers
 analysis/           Reusable city and cross-city metric logic
 data/
-  processed/        Curated local datasets used by dashboard
-tests/              Unit tests for data and metric logic
-config/             City profile configuration (metadata, guardrails, status, copy)
+  raw/              Manually dropped source files (local workflow)
+  processed/        App-ready processed datasets
 docs/               Product/architecture documentation
+scripts/            Local utility scripts (raw->processed)
+tests/              Unit tests for config, ingestion, and metrics
+config/             City profile configuration
 ```
-
-
-## City Profile Configuration
-City-specific metadata now lives in `config/cities.yml` and is loaded via `app/utils/config.py`.
-
-What is centralized per city:
-- display name and status (`live` vs `coming_soon`)
-- subtitle and Canada-page positioning copy
-- dataset path (local for now)
-- guardrail thresholds (`min_years`, `min_avg_listings`, `min_avg_coverage`)
-
-To add a new city next:
-1. Add a city entry in `config/cities.yml`.
-2. Mark it `enabled: true` and `status: live` once data is ready.
-3. Reuse `app/pages/city_overview.py` via a thin wrapper page module and wire it in `app/main.py`.
 
 ## Run Locally
 Run from the repository root:
@@ -86,13 +81,11 @@ pip install -r requirements.txt
 streamlit run app/main.py
 ```
 
-Import/runtime note: app entry scripts include a small `sys.path` bootstrap so Streamlit multipage execution can resolve both `app.*` and `analysis.*` imports reliably from root.
-
 ## Brutally Honest Limitations
-- Data is still local/sample and synthetic; this is not an official benchmark feed.
-- National comparison only includes currently implemented cities (currently Montreal, Toronto, Vancouver).
-- Cross-city comparisons are directional because sample support can differ by city and neighborhood.
-- Dataset is still local/sample and should not be treated as official benchmark quality.
+- This is still a local workflow with manual file drops, not a production data pipeline.
+- Source-backed mode is only as credible as the raw files you provide.
+- There is no automated freshness monitor or schema registry.
+- Cross-city comparisons remain directional and should not be presented as official benchmark quality.
 
 ## Recommended Next Highest-Leverage Step
-Add per-city scenario overlays (e.g., downside/base/upside affordability pressure) using the same shared analysis layer so decision quality improves without breaking the config-driven architecture.
+Add a lightweight `data/sources.yml` manifest (source descriptions + expected columns + update cadence) and validate raw files against it during ingestion to improve repeatability without adding infrastructure.

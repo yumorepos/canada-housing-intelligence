@@ -1,6 +1,7 @@
 primary_experience: canada_overview
 shared_defaults:
-  dataset_path: data/processed/housing_sample.csv
+  dataset_path: data/processed/housing_source_processed.csv
+  fallback_dataset_path: data/processed/housing_sample.csv
   guardrails:
     min_years: 6
     min_avg_listings: 150
@@ -11,7 +12,7 @@ cities:
     display_name: Montreal
     status: live
     enabled: true
-    dataset_path: data/processed/housing_sample.csv
+    dataset_path: data/processed/housing_source_processed.csv
     subtitle: >-
       Decision-support view for rental and ownership pressure in Montreal.
       Insights are generated from the local sample dataset in this repository.
@@ -24,7 +25,7 @@ cities:
     display_name: Toronto
     status: live
     enabled: true
-    dataset_path: data/processed/housing_sample.csv
+    dataset_path: data/processed/housing_source_processed.csv
     subtitle: >-
       Decision-support view for rental and ownership pressure in Toronto.
       Insights are generated from the local sample dataset in this repository.
@@ -37,7 +38,7 @@ cities:
     display_name: Vancouver
     status: live
     enabled: true
-    dataset_path: data/processed/housing_sample.csv
+    dataset_path: data/processed/housing_source_processed.csv
     subtitle: >-
       Decision-support view for rental and ownership pressure in Vancouver.
       Insights are generated from the local sample dataset in this repository.

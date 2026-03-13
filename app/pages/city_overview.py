@@ -32,10 +32,15 @@ def _leader_caption(summary: dict, label: str) -> str:
 
 
 def render_city_overview(
-    data: pd.DataFrame, city: str, subtitle: str, guardrails: dict | None = None
+    data: pd.DataFrame,
+    city: str,
+    subtitle: str,
+    guardrails: dict | None = None,
+    provenance: dict | None = None,
 ) -> None:
     st.header(f"{city} Market Intelligence")
     st.caption(subtitle)
+    provenance = provenance or {}
 
     kpis = calculate_city_kpis(data, city=city)
     yearly = city_yearly_summary(data, city=city)
@@ -64,7 +69,8 @@ def render_city_overview(
 
     st.info(
         f"**Coverage snapshot ({kpis['latest_year']}):** {kpis['latest_sample_listings']:,} listing observations, "
-        f"avg coverage score **{kpis['latest_avg_coverage_pct']:.1f}%**."
+        f"avg coverage score **{kpis['latest_avg_coverage_pct']:.1f}%**. "
+        f"Source: **{provenance.get('source_name', 'local sample dataset')}** ({provenance.get('source_type', 'sample')})."
     )
 
     st.caption(
