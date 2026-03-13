@@ -1,0 +1,13 @@
+city,neighborhood,year,average_rent,median_price
+Montreal,Plateau-Mont-Royal,2020,1350,520000
+Montreal,Plateau-Mont-Royal,2021,1425,555000
+Montreal,Plateau-Mont-Royal,2022,1510,590000
+Montreal,Plateau-Mont-Royal,2023,1620,620000
+Montreal,Rosemont-La Petite-Patrie,2020,1225,460000
+Montreal,Rosemont-La Petite-Patrie,2021,1300,490000
+Montreal,Rosemont-La Petite-Patrie,2022,1380,530000
+Montreal,Rosemont-La Petite-Patrie,2023,1495,565000
+Montreal,Verdun,2020,1180,410000
+Montreal,Verdun,2021,1240,435000
+Montreal,Verdun,2022,1325,470000
+Montreal,Verdun,2023,1410,510000

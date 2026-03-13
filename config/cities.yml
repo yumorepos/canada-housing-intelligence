@@ -1,0 +1,7 @@
+primary_city: Montreal
+supported_cities:
+  - Montreal
+  - Toronto
+  - Vancouver
+data:
+  default_dataset_path: data/processed/housing_sample.csv

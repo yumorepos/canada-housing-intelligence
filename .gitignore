@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.venv/
+venv/
+
+# Tooling
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
+
+# Data artifacts
+*.parquet
+*.feather
+
+# Streamlit
+.streamlit/secrets.toml
