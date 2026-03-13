@@ -1,6 +1,6 @@
 import pandas as pd
 
-from analysis.montreal import calculate_city_kpis
+from analysis.city_metrics import calculate_city_kpis
 
 
 def calculate_housing_metrics(data: pd.DataFrame, city: str) -> dict:

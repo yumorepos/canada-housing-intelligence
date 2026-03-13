@@ -143,3 +143,111 @@ Montreal,Montréal-Nord,Montréal-Nord,2021,1095.0,373142.0,168,51,0.73,all
 Montreal,Montréal-Nord,Montréal-Nord,2022,1139.0,390307.0,162,53,0.74,all
 Montreal,Montréal-Nord,Montréal-Nord,2023,1184.0,408261.0,165,54,0.75,all
 Montreal,Montréal-Nord,Montréal-Nord,2024,1232.0,427041.0,168,50,0.76,all
+Toronto,Downtown,Old Toronto,2016,2050.0,760000.0,360,108,0.92,all
+Toronto,Downtown,Old Toronto,2017,2157.0,805600.0,364,109,0.93,all
+Toronto,Downtown,Old Toronto,2018,2269.0,853936.0,368,110,0.93,all
+Toronto,Downtown,Old Toronto,2019,2387.0,905172.0,372,111,0.94,all
+Toronto,Downtown,Old Toronto,2020,2511.0,959482.0,360,108,0.94,all
+Toronto,Downtown,Old Toronto,2021,2641.0,1017051.0,364,109,0.92,all
+Toronto,Downtown,Old Toronto,2022,2779.0,1078075.0,368,110,0.93,all
+Toronto,Downtown,Old Toronto,2023,2923.0,1142759.0,372,111,0.93,all
+Toronto,Downtown,Old Toronto,2024,3075.0,1211325.0,360,108,0.94,all
+Toronto,Liberty Village,Old Toronto,2016,1950.0,720000.0,320,96,0.90,all
+Toronto,Liberty Village,Old Toronto,2017,2049.0,762480.0,324,97,0.91,all
+Toronto,Liberty Village,Old Toronto,2018,2154.0,807466.0,328,98,0.91,all
+Toronto,Liberty Village,Old Toronto,2019,2264.0,855107.0,332,99,0.92,all
+Toronto,Liberty Village,Old Toronto,2020,2379.0,905558.0,320,96,0.92,all
+Toronto,Liberty Village,Old Toronto,2021,2501.0,958986.0,324,97,0.90,all
+Toronto,Liberty Village,Old Toronto,2022,2628.0,1015566.0,328,98,0.91,all
+Toronto,Liberty Village,Old Toronto,2023,2762.0,1075485.0,332,99,0.91,all
+Toronto,Liberty Village,Old Toronto,2024,2903.0,1138938.0,320,96,0.92,all
+Toronto,North York Centre,North York,2016,1780.0,690000.0,300,90,0.88,all
+Toronto,North York Centre,North York,2017,1862.0,727950.0,303,90,0.89,all
+Toronto,North York Centre,North York,2018,1948.0,767987.0,306,91,0.89,all
+Toronto,North York Centre,North York,2019,2037.0,810227.0,309,92,0.90,all
+Toronto,North York Centre,North York,2020,2131.0,854789.0,300,90,0.90,all
+Toronto,North York Centre,North York,2021,2229.0,901802.0,303,90,0.88,all
+Toronto,North York Centre,North York,2022,2331.0,951402.0,306,91,0.89,all
+Toronto,North York Centre,North York,2023,2439.0,1003729.0,309,92,0.89,all
+Toronto,North York Centre,North York,2024,2551.0,1058934.0,300,90,0.90,all
+Toronto,Scarborough Town Centre,Scarborough,2016,1620.0,620000.0,255,76,0.85,all
+Toronto,Scarborough Town Centre,Scarborough,2017,1691.0,651000.0,258,77,0.85,all
+Toronto,Scarborough Town Centre,Scarborough,2018,1766.0,683550.0,261,78,0.86,all
+Toronto,Scarborough Town Centre,Scarborough,2019,1843.0,717728.0,264,79,0.86,all
+Toronto,Scarborough Town Centre,Scarborough,2020,1924.0,753614.0,255,76,0.87,all
+Toronto,Scarborough Town Centre,Scarborough,2021,2009.0,791295.0,258,77,0.85,all
+Toronto,Scarborough Town Centre,Scarborough,2022,2098.0,830859.0,261,78,0.85,all
+Toronto,Scarborough Town Centre,Scarborough,2023,2190.0,872402.0,264,79,0.86,all
+Toronto,Scarborough Town Centre,Scarborough,2024,2286.0,916022.0,255,76,0.86,all
+Toronto,Etobicoke South,Etobicoke,2016,1710.0,650000.0,248,74,0.84,all
+Toronto,Etobicoke South,Etobicoke,2017,1784.0,683150.0,251,75,0.84,all
+Toronto,Etobicoke South,Etobicoke,2018,1860.0,717991.0,254,76,0.85,all
+Toronto,Etobicoke South,Etobicoke,2019,1940.0,754608.0,257,77,0.85,all
+Toronto,Etobicoke South,Etobicoke,2020,2024.0,793093.0,248,74,0.86,all
+Toronto,Etobicoke South,Etobicoke,2021,2111.0,833541.0,251,75,0.84,all
+Toronto,Etobicoke South,Etobicoke,2022,2201.0,876052.0,254,76,0.84,all
+Toronto,Etobicoke South,Etobicoke,2023,2296.0,920730.0,257,77,0.85,all
+Toronto,Etobicoke South,Etobicoke,2024,2395.0,967687.0,248,74,0.85,all
+Toronto,The Beaches,Old Toronto,2016,1890.0,810000.0,188,56,0.79,all
+Toronto,The Beaches,Old Toronto,2017,1975.0,853740.0,190,57,0.80,all
+Toronto,The Beaches,Old Toronto,2018,2064.0,899842.0,192,57,0.80,all
+Toronto,The Beaches,Old Toronto,2019,2157.0,948433.0,194,58,0.81,all
+Toronto,The Beaches,Old Toronto,2020,2254.0,999649.0,188,56,0.81,all
+Toronto,The Beaches,Old Toronto,2021,2355.0,1053630.0,190,57,0.79,all
+Toronto,The Beaches,Old Toronto,2022,2461.0,1110526.0,192,57,0.80,all
+Toronto,The Beaches,Old Toronto,2023,2572.0,1170494.0,194,58,0.80,all
+Toronto,The Beaches,Old Toronto,2024,2688.0,1233701.0,188,56,0.81,all
+Toronto,High Park,Old Toronto,2016,1860.0,840000.0,182,55,0.78,all
+Toronto,High Park,Old Toronto,2017,1942.0,884520.0,184,55,0.79,all
+Toronto,High Park,Old Toronto,2018,2027.0,931400.0,186,55,0.79,all
+Toronto,High Park,Old Toronto,2019,2116.0,980764.0,188,56,0.80,all
+Toronto,High Park,Old Toronto,2020,2210.0,1032744.0,182,55,0.80,all
+Toronto,High Park,Old Toronto,2021,2307.0,1087480.0,184,55,0.78,all
+Toronto,High Park,Old Toronto,2022,2408.0,1145116.0,186,55,0.79,all
+Toronto,High Park,Old Toronto,2023,2514.0,1205807.0,188,56,0.79,all
+Toronto,High Park,Old Toronto,2024,2625.0,1269715.0,182,55,0.80,all
+Toronto,Leslieville,Old Toronto,2016,1820.0,770000.0,210,63,0.82,all
+Toronto,Leslieville,Old Toronto,2017,1907.0,813890.0,212,63,0.82,all
+Toronto,Leslieville,Old Toronto,2018,1999.0,860282.0,214,64,0.83,all
+Toronto,Leslieville,Old Toronto,2019,2095.0,909318.0,216,64,0.83,all
+Toronto,Leslieville,Old Toronto,2020,2195.0,961149.0,210,63,0.84,all
+Toronto,Leslieville,Old Toronto,2021,2301.0,1015934.0,212,63,0.82,all
+Toronto,Leslieville,Old Toronto,2022,2411.0,1073843.0,214,64,0.82,all
+Toronto,Leslieville,Old Toronto,2023,2527.0,1135052.0,216,64,0.83,all
+Toronto,Leslieville,Old Toronto,2024,2648.0,1199750.0,210,63,0.83,all
+Toronto,Willowdale East,North York,2016,1760.0,700000.0,236,70,0.83,all
+Toronto,Willowdale East,North York,2017,1839.0,736400.0,238,71,0.83,all
+Toronto,Willowdale East,North York,2018,1922.0,774693.0,240,72,0.84,all
+Toronto,Willowdale East,North York,2019,2008.0,814977.0,242,72,0.84,all
+Toronto,Willowdale East,North York,2020,2099.0,857356.0,236,70,0.85,all
+Toronto,Willowdale East,North York,2021,2193.0,901938.0,238,71,0.83,all
+Toronto,Willowdale East,North York,2022,2292.0,948839.0,240,72,0.83,all
+Toronto,Willowdale East,North York,2023,2395.0,998179.0,242,72,0.84,all
+Toronto,Willowdale East,North York,2024,2503.0,1050084.0,236,70,0.84,all
+Toronto,Roncesvalles,Old Toronto,2016,1740.0,735000.0,168,55,0.75,all
+Toronto,Roncesvalles,Old Toronto,2017,1815.0,772485.0,169,55,0.76,all
+Toronto,Roncesvalles,Old Toronto,2018,1893.0,811882.0,170,55,0.76,all
+Toronto,Roncesvalles,Old Toronto,2019,1974.0,853288.0,171,55,0.77,all
+Toronto,Roncesvalles,Old Toronto,2020,2059.0,896805.0,168,55,0.77,all
+Toronto,Roncesvalles,Old Toronto,2021,2148.0,942542.0,169,55,0.75,all
+Toronto,Roncesvalles,Old Toronto,2022,2240.0,990612.0,170,55,0.76,all
+Toronto,Roncesvalles,Old Toronto,2023,2336.0,1041133.0,171,55,0.76,all
+Toronto,Roncesvalles,Old Toronto,2024,2437.0,1094231.0,168,55,0.77,all
+Toronto,Parkdale,Old Toronto,2016,1660.0,680000.0,172,55,0.74,all
+Toronto,Parkdale,Old Toronto,2017,1726.0,711960.0,173,55,0.74,all
+Toronto,Parkdale,Old Toronto,2018,1795.0,745422.0,174,55,0.75,all
+Toronto,Parkdale,Old Toronto,2019,1867.0,780457.0,175,55,0.76,all
+Toronto,Parkdale,Old Toronto,2020,1942.0,817138.0,172,55,0.76,all
+Toronto,Parkdale,Old Toronto,2021,2020.0,855544.0,173,55,0.74,all
+Toronto,Parkdale,Old Toronto,2022,2100.0,895755.0,174,55,0.74,all
+Toronto,Parkdale,Old Toronto,2023,2184.0,937855.0,175,55,0.75,all
+Toronto,Parkdale,Old Toronto,2024,2272.0,981934.0,172,55,0.76,all
+Toronto,East York,East York,2016,1580.0,640000.0,146,55,0.70,all
+Toronto,East York,East York,2017,1642.0,669440.0,147,55,0.70,all
+Toronto,East York,East York,2018,1706.0,700234.0,148,55,0.71,all
+Toronto,East York,East York,2019,1772.0,732445.0,149,55,0.71,all
+Toronto,East York,East York,2020,1841.0,766137.0,146,55,0.72,all
+Toronto,East York,East York,2021,1913.0,801380.0,147,55,0.70,all
+Toronto,East York,East York,2022,1988.0,838243.0,148,55,0.70,all
+Toronto,East York,East York,2023,2065.0,876802.0,149,55,0.71,all
+Toronto,East York,East York,2024,2146.0,917135.0,146,55,0.71,all

@@ -13,5 +13,7 @@ def load_city_config(config_path: str = "config/cities.yml") -> dict:
 
     if "supported_cities" not in config or not isinstance(config["supported_cities"], dict):
         raise ValueError("Config must include a 'supported_cities' mapping.")
+    if "dataset_path" not in config:
+        raise ValueError("Config must include a top-level 'dataset_path'.")
 
     return config
