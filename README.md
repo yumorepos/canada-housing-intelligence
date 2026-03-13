@@ -1,7 +1,7 @@
 # Canada Housing Intelligence
 
 Canada Housing Intelligence is a recruiter-facing, local-first housing analytics product focused on making market shifts understandable in seconds.
-The app now opens on a real Canada comparison page, with Montreal and Toronto available as drill-down city experiences. Vancouver remains staged as upcoming.
+The app now opens on a real Canada comparison page, with Montreal, Toronto, and Vancouver available as drill-down city experiences.
 
 ## What This Repository Is
 - A **local-first** analytics foundation that runs without external infrastructure.
@@ -23,7 +23,7 @@ The app now opens on a real Canada comparison page, with Montreal and Toronto av
 - **Analyst notes with explicit scope caveat**
   - clear reminder that comparisons are directional and based on local/sample data
 
-### City drill-downs (Montreal + Toronto)
+### City drill-downs (Montreal + Toronto + Vancouver)
 Each implemented city includes:
 - executive snapshot KPIs
 - market trajectory charts
@@ -32,7 +32,7 @@ Each implemented city includes:
 - concise analyst notes
 
 ## Local Dataset (sample, not official)
-`data/processed/housing_sample.csv` contains local sample records for Montreal and Toronto.
+`data/processed/housing_sample.csv` contains local sample records for Montreal, Toronto, and Vancouver.
 
 Fields used by analysis:
 - `city`, `neighborhood`, `year`, `average_rent`, `median_price`
@@ -77,7 +77,7 @@ What is centralized per city:
 To add a new city next:
 1. Add a city entry in `config/cities.yml`.
 2. Mark it `enabled: true` and `status: live` once data is ready.
-3. Reuse `app/pages/city_overview.py` via a thin wrapper page module.
+3. Reuse `app/pages/city_overview.py` via a thin wrapper page module and wire it in `app/main.py`.
 
 ## Run Locally
 Run from the repository root:
@@ -90,9 +90,9 @@ Import/runtime note: app entry scripts include a small `sys.path` bootstrap so S
 
 ## Brutally Honest Limitations
 - Data is still local/sample and synthetic; this is not an official benchmark feed.
-- National comparison only includes currently implemented cities (Montreal and Toronto).
+- National comparison only includes currently implemented cities (currently Montreal, Toronto, Vancouver).
 - Cross-city comparisons are directional because sample support can differ by city and neighborhood.
-- Vancouver is not implemented yet.
+- Dataset is still local/sample and should not be treated as official benchmark quality.
 
 ## Recommended Next Highest-Leverage Step
-Add a shared city profile configuration layer (per-city thresholds, metadata, and narrative copy) so enabling Vancouver becomes mostly a data + config operation with minimal UI changes.
+Add per-city scenario overlays (e.g., downside/base/upside affordability pressure) using the same shared analysis layer so decision quality improves without breaking the config-driven architecture.
