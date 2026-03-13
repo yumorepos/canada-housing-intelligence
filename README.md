@@ -1,49 +1,54 @@
 # Canada Housing Intelligence
 
-Canada Housing Intelligence is the new flagship, portfolio-grade housing analytics product for Canada.
-It keeps a clean product architecture while integrating practical Montreal analysis patterns from earlier Montreal-focused workstreams.
+Canada Housing Intelligence is a recruiter-facing, local-first housing analytics product focused on making market shifts understandable in seconds.
+Montreal is the first fully implemented city and now serves as a decision-support experience rather than a simple dashboard demo.
 
 ## What This Repository Is
-- A **local-first** analytics product foundation.
-- A **Streamlit application** with Montreal as the first real city implementation.
-- A codebase structured for deliberate expansion to Toronto and Vancouver without infrastructure bloat.
+- A **local-first** analytics foundation that runs without external infrastructure.
+- A **Streamlit product UI** with a polished Montreal intelligence page.
+- A modular codebase designed to scale to Toronto and Vancouver without rework.
 
 ## Migration Context
-This repo upgrades and consolidates prior Montreal-only work into a cleaner architecture.
+This repo consolidates and upgrades prior Montreal-focused work patterns into a cleaner architecture.
 
-Source repos targeted for migration:
+Source repos originally targeted for migration:
 - `yumorepos/montreal-housing-dashboard`
 - `yumorepos/montreal-housing-analysis`
 
 ### Brutally honest migration status
-- The old repos could not be cloned from this execution environment (network proxy blocked GitHub access).
-- Because of that, this migration iteration focused on integrating the **best-practice patterns** already represented in this repo and converting Montreal from demo framing into a stronger analytical city module.
-- The architecture is now ready for direct code-level import from both legacy repos once network access is available.
+- The old repos could not be cloned from this execution environment due network/proxy restrictions.
+- This iteration **does not claim a full source-level migration** from those repositories.
+- Instead, it upgrades this repo's Montreal implementation into a stronger product experience with cleaner analysis boundaries.
 
 ## Current Product Capabilities (Montreal)
-- Recruiter-facing Montreal dashboard with:
-  - city KPI cards (rent, price, growth)
-  - citywide trend charts (rent and sale price)
-  - neighborhood affordability snapshot table
-  - rent-vs-price scatter positioning
-- Reusable analysis module (`analysis/montreal.py`) for:
-  - data cleaning and validation
-  - yearly city summaries
-  - neighborhood affordability metrics
-  - KPI calculation
-- Config-driven city setup (`config/cities.yml`) keeping Toronto/Vancouver paths extensible.
+The Montreal page now includes:
+- **Executive snapshot KPIs**
+  - latest average rent and sale price
+  - YoY rent/price change
+  - period growth and rent-to-price ratio shift
+- **Market trajectory section**
+  - citywide rent/price trend
+  - affordability ratio trend (annual rent / median price)
+- **Neighborhood momentum section**
+  - rent growth leaders/laggards
+  - price growth leaders/laggards
+  - neighborhood stability signal via growth volatility
+- **Current positioning section**
+  - latest affordability snapshot table
+  - rent-vs-price positioning scatter
+- **Analyst notes**
+  - concise interpretation of affordability pressure, momentum dispersion, and stability
+
+All insights are derived from the local sample dataset in `data/processed/housing_sample.csv` and should be treated as directional, not official citywide estimates.
 
 ## Repository Structure
 ```text
 app/                Streamlit app
   pages/            City-facing UI modules
   utils/            Config and data access helpers
-analysis/           Reusable analysis/cleaning logic
-etl/                Future ingestion/transformation jobs
+analysis/           Reusable metric and transformation logic
 data/
-  raw/              Raw datasets
   processed/        Curated local datasets used by dashboard
-models/             Future predictive models
 tests/              Unit tests for data and metric logic
 config/             City and dataset configuration
 docs/               Product/architecture documentation
@@ -63,13 +68,13 @@ streamlit run app/main.py
 ```
 
 ## Roadmap
-### Next
-- complete direct migration from both Montreal legacy repos once source access is available
-- add Toronto dataset + city page
-- add Vancouver dataset + city page
+### Next highest leverage
+- integrate a richer Montreal dataset (additional neighborhoods + transaction volume/context columns) to improve reliability of ranking and volatility insights
 
 ### Later
-- affordability scoring model
-- forecast models for rent/price trends
-- geospatial neighborhood views
-- scheduled ETL workflows
+- complete direct source-level migration from the two legacy Montreal repos once network access is available
+- add Toronto dataset + city page
+- add Vancouver dataset + city page
+- add affordability scoring model
+- add forecast models for rent/price trends
+- add geospatial neighborhood views

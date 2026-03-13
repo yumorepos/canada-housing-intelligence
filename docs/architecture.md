@@ -1,34 +1,44 @@
 # Architecture Notes
 
 ## Product direction
-Canada Housing Intelligence is intentionally local-first and lightweight:
+Canada Housing Intelligence stays intentionally lightweight and honest:
 - no external services required to run
 - no fake production infrastructure
-- clear separation between UI, analysis logic, and data access
+- clear separation between UI composition and analytical logic
+- recruiter-grade storytelling layered on top of reproducible metrics
 
 ## Module boundaries
-- `app/`: Streamlit UI and page composition only.
-- `analysis/`: reusable metric + transformation logic.
-- `app/utils/`: thin wrappers for config loading and file-based dataset loading.
-- `data/processed/`: app-ready datasets.
+- `app/`: Streamlit UI layout, narrative flow, and section composition only.
+- `analysis/`: reusable city analytics (KPIs, growth rankings, affordability, volatility).
+- `app/utils/`: thin wrappers for config loading and file-based data loading.
+- `data/processed/`: app-ready local datasets.
 
-## Migration decisions
+## Montreal implementation decisions
 ### Kept / strengthened
-- clear multi-city app framing
-- modular utility-based loading
-- straightforward metrics with tests
-- data-driven page composition
+- multi-city framing with Montreal as first implemented market
+- config-driven dataset wiring for future city expansion
+- local-first execution model
 
-### Rewritten lightly
-- moved core metric logic into `analysis/montreal.py` to avoid KPI duplication in UI
-- replaced minimal demo-only visualization with multi-section analytical view
-- upgraded city config from list to city mapping for future extensibility
+### Upgraded in this iteration
+- moved additional business logic into `analysis/montreal.py`:
+  - affordability ratio trend
+  - neighborhood growth leader/laggard ranking
+  - neighborhood volatility indicators
+  - richer KPI bundle with YoY + period signals
+- redesigned Montreal page hierarchy into:
+  - Executive Snapshot
+  - Market Trajectory
+  - Neighborhood Momentum & Stability
+  - Current Positioning & Affordability
+  - Analyst Notes
+- replaced demo-like captions with decision-support-oriented interpretation text
 
-### Dropped (intentionally)
-- placeholder-only framing that looked like a toy dashboard
-- duplicated metric logic across files
-- any non-integrated scripts/notebooks that do not feed product code
+### Intentionally not implemented
+- Toronto/Vancouver analytics modules
+- external pipelines or infrastructure-heavy services
+- any claims of complete line-by-line migration from blocked source repos
 
 ## Honest limitations
-- Direct repository-level migration from the two legacy Montreal repos is blocked in this environment due GitHub network restrictions.
-- This iteration prepares clean integration points and improves Montreal product quality, but does not claim full line-by-line import from legacy repos.
+- Insights are based on the included local sample dataset and are directional.
+- Neighborhood rankings are sensitive to sample coverage and should not be interpreted as official benchmarks.
+- Direct repository-level migration from the two legacy Montreal repos is still blocked by environment GitHub access limits.
