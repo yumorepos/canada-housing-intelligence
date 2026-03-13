@@ -1,13 +1,14 @@
 primary_city: Montreal
+dataset_path: data/processed/housing_sample.csv
 supported_cities:
   Montreal:
     enabled: true
     status: live
-    dataset_path: data/processed/housing_sample.csv
     page_module: app.pages.montreal_overview
   Toronto:
-    enabled: false
-    status: coming_soon
+    enabled: true
+    status: live
+    page_module: app.pages.toronto_overview
   Vancouver:
     enabled: false
     status: coming_soon

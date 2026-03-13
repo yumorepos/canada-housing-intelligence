@@ -1,6 +1,6 @@
 import pandas as pd
 
-from analysis.montreal import (
+from analysis.city_metrics import (
     calculate_city_kpis,
     clean_housing_data,
     leader_laggard_summary,
@@ -115,3 +115,25 @@ def test_neighborhood_growth_rankings_respect_robustness_thresholds():
     assert summary["leader"][0] == "A"
     assert summary["laggard"][0] == "A"
     assert coverage_summary == {"total": 2, "robust": 1, "directional": 1}
+
+
+def test_multi_city_logic_keeps_city_scopes_independent():
+    df = pd.DataFrame(
+        {
+            "city": ["Montreal", "Montreal", "Toronto", "Toronto"],
+            "neighborhood": ["A", "A", "A", "A"],
+            "borough": ["X", "X", "Y", "Y"],
+            "year": [2023, 2024, 2023, 2024],
+            "average_rent": [1400, 1500, 2200, 2300],
+            "median_price": [500000, 525000, 800000, 840000],
+            "listing_count": [200, 210, 260, 270],
+            "coverage_score": [0.8, 0.82, 0.9, 0.91],
+        }
+    )
+
+    montreal_kpis = calculate_city_kpis(df, "Montreal")
+    toronto_kpis = calculate_city_kpis(df, "Toronto")
+
+    assert montreal_kpis["latest_avg_rent"] == 1500
+    assert toronto_kpis["latest_avg_rent"] == 2300
+    assert toronto_kpis["latest_avg_price"] > montreal_kpis["latest_avg_price"]
