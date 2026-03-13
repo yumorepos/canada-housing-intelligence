@@ -248,3 +248,82 @@ def ranking_coverage_summary(rankings: pd.DataFrame) -> dict:
     robust_count = int(rankings["is_robust"].sum())
     total = int(len(rankings))
     return {"total": total, "robust": robust_count, "directional": total - robust_count}
+
+
+def canada_city_comparison(data: pd.DataFrame, cities: list[str]) -> pd.DataFrame:
+    """Build a city-level comparison table for the Canada overview page."""
+    rows = []
+    for city in cities:
+        kpis = calculate_city_kpis(data, city)
+        if kpis["latest_year"] is None:
+            continue
+
+        rows.append(
+            {
+                "city": city,
+                "latest_year": kpis["latest_year"],
+                "avg_monthly_rent": kpis["latest_avg_rent"],
+                "avg_median_price": kpis["latest_avg_price"],
+                "rent_growth_pct": kpis["rent_growth_pct"],
+                "price_growth_pct": kpis["price_growth_pct"],
+                "rent_to_price_ratio_pct": kpis["latest_ratio_pct"],
+                "avg_coverage_pct": kpis["latest_avg_coverage_pct"],
+                "sample_listings": kpis["latest_sample_listings"],
+            }
+        )
+
+    comparison = pd.DataFrame(rows)
+    if comparison.empty:
+        return comparison
+
+    comparison["rent_rank_affordable"] = comparison["avg_monthly_rent"].rank(method="min")
+    comparison["price_rank_affordable"] = comparison["avg_median_price"].rank(method="min")
+    comparison["pressure_rank"] = (
+        (comparison["rent_growth_pct"] + comparison["price_growth_pct"]) / 2
+    ).rank(method="min", ascending=False)
+
+    return comparison.sort_values("avg_monthly_rent").reset_index(drop=True)
+
+
+def canada_comparison_insights(comparison: pd.DataFrame) -> dict:
+    """Generate concise decision-oriented insight signals from city comparison data."""
+    if comparison.empty:
+        return {
+            "most_affordable_rent_city": None,
+            "most_affordable_price_city": None,
+            "highest_pressure_city": None,
+            "strongest_coverage_city": None,
+            "affordability_gap_rent": None,
+            "affordability_gap_price": None,
+        }
+
+    lowest_rent = comparison.loc[comparison["avg_monthly_rent"].idxmin()]
+    lowest_price = comparison.loc[comparison["avg_median_price"].idxmin()]
+    highest_pressure = comparison.assign(
+        pressure_score=(comparison["rent_growth_pct"] + comparison["price_growth_pct"]) / 2
+    ).sort_values("pressure_score", ascending=False).iloc[0]
+    highest_coverage = comparison.loc[comparison["avg_coverage_pct"].idxmax()]
+
+    return {
+        "most_affordable_rent_city": str(lowest_rent["city"]),
+        "most_affordable_price_city": str(lowest_price["city"]),
+        "highest_pressure_city": str(highest_pressure["city"]),
+        "strongest_coverage_city": str(highest_coverage["city"]),
+        "affordability_gap_rent": float(comparison["avg_monthly_rent"].max() - comparison["avg_monthly_rent"].min()),
+        "affordability_gap_price": float(comparison["avg_median_price"].max() - comparison["avg_median_price"].min()),
+    }
+
+
+def canada_multi_city_trends(data: pd.DataFrame, cities: list[str]) -> pd.DataFrame:
+    """Return annual trend metrics for supported city-level comparison charts."""
+    scoped = data[data["city"].isin(cities)]
+    if scoped.empty:
+        return pd.DataFrame(columns=["city", "year", "avg_rent", "avg_price", "rent_to_price_ratio"])
+
+    trends = (
+        scoped.groupby(["city", "year"], as_index=False)
+        .agg(avg_rent=("average_rent", "mean"), avg_price=("median_price", "mean"))
+        .sort_values(["city", "year"])
+    )
+    trends["rent_to_price_ratio"] = (trends["avg_rent"] * 12) / trends["avg_price"]
+    return trends

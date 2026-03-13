@@ -1,32 +1,35 @@
 # Canada Housing Intelligence
 
 Canada Housing Intelligence is a recruiter-facing, local-first housing analytics product focused on making market shifts understandable in seconds.
-Montreal and Toronto are now fully implemented city experiences, with Vancouver staged as the next expansion.
+The app now opens on a real Canada comparison page, with Montreal and Toronto available as drill-down city experiences. Vancouver remains staged as upcoming.
 
 ## What This Repository Is
 - A **local-first** analytics foundation that runs without external infrastructure.
-- A **Streamlit product UI** with polished city intelligence pages.
+- A **Streamlit product UI** with a national comparison entry point and city intelligence pages.
 - A modular codebase designed to scale city-by-city without large rewrites.
 
-## Current Product Capabilities (Montreal + Toronto)
-Each implemented city now includes:
-- **Executive snapshot KPIs**
-  - latest average rent and sale price
-  - YoY rent/price change
-  - period growth and rent-to-price ratio shift
-  - latest sample coverage and listing-observation totals
-- **Market trajectory section**
-  - citywide rent/price trend
-  - affordability ratio trend (annual rent / median price)
-- **Neighborhood momentum section**
-  - robust-only rent growth leaders/laggards
-  - robust-only price growth leaders/laggards
-  - neighborhood stability signal via growth volatility
-- **Current positioning section**
-  - latest affordability snapshot table with coverage fields
-  - rent-vs-price positioning scatter
-- **Analyst notes**
-  - concise interpretation of affordability pressure, momentum dispersion, and stability
+## Current Product Capabilities
+### Canada overview (national comparison layer)
+- **Decision snapshot metrics**
+  - lower-rent city and lower-price city
+  - higher-pressure city (combined rent/price growth signal)
+  - strongest latest-year data coverage city
+- **Cross-city comparison table**
+  - latest average rent, median price, rent/price growth, affordability ratio, coverage %, listing samples
+- **High-value visuals**
+  - affordability now (rent vs price by city)
+  - pressure comparison (rent growth vs price growth)
+  - city-level affordability trend divergence over time (rent-to-price ratio)
+- **Analyst notes with explicit scope caveat**
+  - clear reminder that comparisons are directional and based on local/sample data
+
+### City drill-downs (Montreal + Toronto)
+Each implemented city includes:
+- executive snapshot KPIs
+- market trajectory charts
+- neighborhood momentum with robustness guardrails
+- current affordability positioning table + scatter
+- concise analyst notes
 
 ## Local Dataset (sample, not official)
 `data/processed/housing_sample.csv` contains local sample records for Montreal and Toronto.
@@ -51,9 +54,9 @@ All insights are derived from a local sample dataset and should be treated as di
 ## Repository Structure
 ```text
 app/                Streamlit app
-  pages/            City-facing UI modules
+  pages/            Canada and city-facing UI modules
   utils/            Config and data access helpers
-analysis/           Reusable city metric and transformation logic
+analysis/           Reusable city and cross-city metric logic
 data/
   processed/        Curated local datasets used by dashboard
 tests/              Unit tests for data and metric logic
@@ -69,8 +72,9 @@ streamlit run app/main.py
 
 ## Brutally Honest Limitations
 - Data is still local/sample and synthetic; this is not an official benchmark feed.
-- Cross-city comparisons should be interpreted as directional because sample support differs by neighborhood.
+- National comparison only includes currently implemented cities (Montreal and Toronto).
+- Cross-city comparisons are directional because sample support can differ by city and neighborhood.
 - Vancouver is not implemented yet.
 
 ## Recommended Next Highest-Leverage Step
-Add a shared city profile layer (per-city metadata, thresholds, and narrative copy in config) so Vancouver can be enabled by adding data + one small page wrapper.
+Add a shared city profile configuration layer (per-city thresholds, metadata, and narrative copy) so enabling Vancouver becomes mostly a data + config operation with minimal UI changes.

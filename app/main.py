@@ -1,5 +1,6 @@
 import streamlit as st
 
+from app.pages.canada_overview import render_canada_overview
 from app.pages.montreal_overview import render_montreal_overview
 from app.pages.toronto_overview import render_toronto_overview
 from app.utils.config import load_city_config
@@ -11,8 +12,8 @@ def main() -> None:
 
     st.title("Canada Housing Intelligence")
     st.write(
-        "Flagship housing analytics product for Canadian cities. Montreal and Toronto are now implemented city "
-        "intelligence views, with Vancouver staged for expansion."
+        "National housing intelligence product for Canadian cities. Start with Canada-wide comparison, "
+        "then drill into Montreal and Toronto city intelligence views."
     )
 
     config = load_city_config()
@@ -25,10 +26,14 @@ def main() -> None:
 
     st.caption(f"Implemented cities: **{', '.join(implemented)}**. Upcoming: **{', '.join(upcoming)}**.")
 
-    page_labels = [f"{city} Housing Overview" for city in implemented] + [f"{city} (Coming Soon)" for city in upcoming]
-    page = st.sidebar.selectbox("Select city view", page_labels)
+    page_labels = ["Canada Overview"] + [f"{city} Housing Overview" for city in implemented] + [
+        f"{city} (Coming Soon)" for city in upcoming
+    ]
+    page = st.sidebar.selectbox("Select experience", page_labels)
 
-    if page == "Montreal Housing Overview":
+    if page == "Canada Overview":
+        render_canada_overview(data, implemented_cities=implemented, upcoming_cities=upcoming)
+    elif page == "Montreal Housing Overview":
         render_montreal_overview(data)
     elif page == "Toronto Housing Overview":
         render_toronto_overview(data)
