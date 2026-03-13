@@ -10,26 +10,28 @@ def main() -> None:
 
     st.title("Canada Housing Intelligence")
     st.write(
-        "A local-first housing analytics platform focused on affordability, market pricing, "
-        "and livability insights across major Canadian cities."
+        "Flagship housing analytics product for Canadian cities. Montreal is now the first implemented city case study, "
+        "with Toronto and Vancouver staged for expansion."
     )
 
     config = load_city_config()
-    data = load_housing_data(config["data"]["default_dataset_path"])
+    cities = config["supported_cities"]
+    montreal_cfg = cities["Montreal"]
+    data = load_housing_data(montreal_cfg["dataset_path"])
 
     page = st.sidebar.selectbox(
-        "Select dashboard view",
+        "Select city view",
         ["Montreal Housing Overview", "Toronto (Coming Soon)", "Vancouver (Coming Soon)"],
     )
 
     if page == "Montreal Housing Overview":
         render_montreal_overview(data)
     elif page == "Toronto (Coming Soon)":
-        st.header("Toronto Dashboard")
-        st.info("Toronto analytics modules will be added in upcoming iterations.")
+        st.header("Toronto")
+        st.warning("Toronto integration is not yet migrated into this flagship repo.")
     else:
-        st.header("Vancouver Dashboard")
-        st.info("Vancouver analytics modules will be added in upcoming iterations.")
+        st.header("Vancouver")
+        st.warning("Vancouver integration is not yet migrated into this flagship repo.")
 
 
 if __name__ == "__main__":

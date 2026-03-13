@@ -1,18 +1,34 @@
 # Architecture Notes
 
-## Design Principles
-- **Local-first**: data and dashboard run without external services.
-- **Minimal dependencies**: only Streamlit, Pandas, and YAML parsing.
-- **Scalable by city**: shared utilities + city-specific dashboard modules.
+## Product direction
+Canada Housing Intelligence is intentionally local-first and lightweight:
+- no external services required to run
+- no fake production infrastructure
+- clear separation between UI, analysis logic, and data access
 
-## Current Flow
-1. `config/cities.yml` defines supported cities and default dataset.
-2. `app/main.py` loads config and dataset.
-3. Page modules (starting with Montreal) compute metrics and render visualizations.
-4. Future ETL and models can write outputs into `data/processed/` for direct dashboard consumption.
+## Module boundaries
+- `app/`: Streamlit UI and page composition only.
+- `analysis/`: reusable metric + transformation logic.
+- `app/utils/`: thin wrappers for config loading and file-based dataset loading.
+- `data/processed/`: app-ready datasets.
 
-## Expansion Path
-- Add ETL jobs in `etl/` to ingest public rental and property datasets.
-- Store cleaned city-level files in `data/processed/`.
-- Add affordability and livability scoring in `analysis/` and `models/`.
-- Extend dashboard pages in `app/pages/` for Toronto and Vancouver.
+## Migration decisions
+### Kept / strengthened
+- clear multi-city app framing
+- modular utility-based loading
+- straightforward metrics with tests
+- data-driven page composition
+
+### Rewritten lightly
+- moved core metric logic into `analysis/montreal.py` to avoid KPI duplication in UI
+- replaced minimal demo-only visualization with multi-section analytical view
+- upgraded city config from list to city mapping for future extensibility
+
+### Dropped (intentionally)
+- placeholder-only framing that looked like a toy dashboard
+- duplicated metric logic across files
+- any non-integrated scripts/notebooks that do not feed product code
+
+## Honest limitations
+- Direct repository-level migration from the two legacy Montreal repos is blocked in this environment due GitHub network restrictions.
+- This iteration prepares clean integration points and improves Montreal product quality, but does not claim full line-by-line import from legacy repos.

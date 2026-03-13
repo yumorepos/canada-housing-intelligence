@@ -1,13 +1,57 @@
 city,neighborhood,year,average_rent,median_price
-Montreal,Plateau-Mont-Royal,2020,1350,520000
-Montreal,Plateau-Mont-Royal,2021,1425,555000
-Montreal,Plateau-Mont-Royal,2022,1510,590000
-Montreal,Plateau-Mont-Royal,2023,1620,620000
-Montreal,Rosemont-La Petite-Patrie,2020,1225,460000
-Montreal,Rosemont-La Petite-Patrie,2021,1300,490000
-Montreal,Rosemont-La Petite-Patrie,2022,1380,530000
-Montreal,Rosemont-La Petite-Patrie,2023,1495,565000
-Montreal,Verdun,2020,1180,410000
-Montreal,Verdun,2021,1240,435000
-Montreal,Verdun,2022,1325,470000
-Montreal,Verdun,2023,1410,510000
+Montreal,Plateau-Mont-Royal,2018,1280,485000
+Montreal,Plateau-Mont-Royal,2019,1316.0,506825.0
+Montreal,Plateau-Mont-Royal,2020,1353.0,529632.0
+Montreal,Plateau-Mont-Royal,2021,1391.0,553466.0
+Montreal,Plateau-Mont-Royal,2022,1467.0,589441.0
+Montreal,Plateau-Mont-Royal,2023,1548.0,627754.0
+Montreal,Plateau-Mont-Royal,2024,1633.0,668559.0
+Montreal,Rosemont-La Petite-Patrie,2018,1180,425000
+Montreal,Rosemont-La Petite-Patrie,2019,1213.0,444125.0
+Montreal,Rosemont-La Petite-Patrie,2020,1247.0,464111.0
+Montreal,Rosemont-La Petite-Patrie,2021,1282.0,484996.0
+Montreal,Rosemont-La Petite-Patrie,2022,1352.0,516520.0
+Montreal,Rosemont-La Petite-Patrie,2023,1427.0,550094.0
+Montreal,Rosemont-La Petite-Patrie,2024,1505.0,585850.0
+Montreal,Verdun,2018,1100,385000
+Montreal,Verdun,2019,1131.0,402325.0
+Montreal,Verdun,2020,1162.0,420430.0
+Montreal,Verdun,2021,1195.0,439349.0
+Montreal,Verdun,2022,1261.0,467907.0
+Montreal,Verdun,2023,1330.0,498321.0
+Montreal,Verdun,2024,1403.0,530711.0
+Montreal,Ville-Marie,2018,1400,520000
+Montreal,Ville-Marie,2019,1439.0,543400.0
+Montreal,Ville-Marie,2020,1479.0,567853.0
+Montreal,Ville-Marie,2021,1521.0,593406.0
+Montreal,Ville-Marie,2022,1605.0,631978.0
+Montreal,Ville-Marie,2023,1693.0,673056.0
+Montreal,Ville-Marie,2024,1786.0,716805.0
+Montreal,Villeray-Saint-Michel-Parc-Extension,2018,1050,365000
+Montreal,Villeray-Saint-Michel-Parc-Extension,2019,1079.0,381425.0
+Montreal,Villeray-Saint-Michel-Parc-Extension,2020,1110.0,398589.0
+Montreal,Villeray-Saint-Michel-Parc-Extension,2021,1141.0,416526.0
+Montreal,Villeray-Saint-Michel-Parc-Extension,2022,1203.0,443600.0
+Montreal,Villeray-Saint-Michel-Parc-Extension,2023,1270.0,472434.0
+Montreal,Villeray-Saint-Michel-Parc-Extension,2024,1339.0,503142.0
+Montreal,Sud-Ouest,2018,1320,470000
+Montreal,Sud-Ouest,2019,1357.0,491150.0
+Montreal,Sud-Ouest,2020,1395.0,513252.0
+Montreal,Sud-Ouest,2021,1434.0,536348.0
+Montreal,Sud-Ouest,2022,1513.0,571211.0
+Montreal,Sud-Ouest,2023,1596.0,608339.0
+Montreal,Sud-Ouest,2024,1684.0,647881.0
+Montreal,Hochelaga-Maisonneuve,2018,980,340000
+Montreal,Hochelaga-Maisonneuve,2019,1007.0,355300.0
+Montreal,Hochelaga-Maisonneuve,2020,1036.0,371288.0
+Montreal,Hochelaga-Maisonneuve,2021,1065.0,387996.0
+Montreal,Hochelaga-Maisonneuve,2022,1123.0,413216.0
+Montreal,Hochelaga-Maisonneuve,2023,1185.0,440075.0
+Montreal,Hochelaga-Maisonneuve,2024,1250.0,468680.0
+Montreal,Côte-des-Neiges–Notre-Dame-de-Grâce,2018,1120,395000
+Montreal,Côte-des-Neiges–Notre-Dame-de-Grâce,2019,1151.0,412775.0
+Montreal,Côte-des-Neiges–Notre-Dame-de-Grâce,2020,1184.0,431350.0
+Montreal,Côte-des-Neiges–Notre-Dame-de-Grâce,2021,1217.0,450761.0
+Montreal,Côte-des-Neiges–Notre-Dame-de-Grâce,2022,1284.0,480060.0
+Montreal,Côte-des-Neiges–Notre-Dame-de-Grâce,2023,1354.0,511264.0
+Montreal,Côte-des-Neiges–Notre-Dame-de-Grâce,2024,1429.0,544496.0
