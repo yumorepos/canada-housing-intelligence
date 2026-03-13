@@ -43,6 +43,16 @@ Implemented as analysis helpers so UI stays presentation-only:
 - `canada_comparison_insights`: emits concise tradeoff signals used in executive notes
 - `canada_multi_city_trends`: builds annual city-level trend series for comparison charts
 
+
+## City profile config layer
+- `config/cities.yml` centralizes per-city metadata and settings (status, subtitles, Canada notes, dataset path, guardrails).
+- `app/utils/config.py` validates and normalizes profiles so UI modules consume a stable shape.
+- `app/main.py` uses config-derived city profiles for navigation and coming-soon behavior.
+- City wrappers stay intentionally thin (`montreal_overview.py`, `toronto_overview.py`) and delegate rendering + thresholds to shared page logic.
+
+### Why this helps scaling
+Adding the next city now mostly requires updating config and providing data, rather than embedding city-specific copy/thresholds in page code.
+
 ## Honest limitations
 - Dataset remains local/sample and synthetic rather than sourced from authoritative feeds.
 - Guardrails improve trustworthiness but do not make outputs statistically official.

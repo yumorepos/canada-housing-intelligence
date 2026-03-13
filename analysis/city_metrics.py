@@ -47,7 +47,11 @@ def clean_housing_data(data: pd.DataFrame) -> pd.DataFrame:
 
 
 def city_yearly_summary(data: pd.DataFrame, city: str) -> pd.DataFrame:
-    city_data = data[data["city"] == city]
+    city_data = data[data["city"] == city].copy()
+    if "coverage_score" not in city_data.columns:
+        city_data["coverage_score"] = 0.6
+    if "listing_count" not in city_data.columns:
+        city_data["listing_count"] = 0
     if city_data.empty:
         return pd.DataFrame(
             columns=["year", "avg_rent", "avg_price", "rent_to_price_ratio", "avg_coverage_score", "sample_listings"]

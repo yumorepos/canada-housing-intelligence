@@ -8,12 +8,19 @@ def _currency(value: float) -> str:
     return f"${value:,.0f}"
 
 
-def render_canada_overview(data: pd.DataFrame, implemented_cities: list[str], upcoming_cities: list[str]) -> None:
+def render_canada_overview(
+    data: pd.DataFrame,
+    implemented_profiles: list[dict],
+    upcoming_profiles: list[dict],
+) -> None:
     st.header("Canada Market Comparison")
     st.caption(
         "National comparison layer for currently implemented cities. Values are based on the local/sample "
         "dataset shipped with this repository and should be treated as directional intelligence."
     )
+
+    implemented_cities = [profile["city"] for profile in implemented_profiles]
+    upcoming_cities = [profile["city"] for profile in upcoming_profiles]
 
     comparison = canada_city_comparison(data, implemented_cities)
     insights = canada_comparison_insights(comparison)
@@ -95,9 +102,11 @@ def render_canada_overview(data: pd.DataFrame, implemented_cities: list[str], up
     st.line_chart(trends, x="year", y="rent_to_price_ratio", color="city")
 
     st.subheader("Analyst Notes")
+    for profile in implemented_profiles:
+        if profile.get("canada_positioning"):
+            st.markdown(f"- **{profile['display_name']}:** {profile['canada_positioning']}")
+
     st.markdown(
-        "- **Affordability tradeoff:** Lower current rent and lower median purchase price are not always paired with weaker growth; "
-        "this view helps make that tradeoff explicit.\n"
         "- **Pressure signal:** We define pressure as combined rent and price growth over time to show where household cost stress "
         "is building faster.\n"
         "- **Honest scope:** This is a local/sample intelligence layer with support and coverage guardrails, not an authoritative "

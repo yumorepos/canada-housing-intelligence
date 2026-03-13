@@ -60,9 +60,24 @@ analysis/           Reusable city and cross-city metric logic
 data/
   processed/        Curated local datasets used by dashboard
 tests/              Unit tests for data and metric logic
-config/             City and dataset configuration
+config/             City profile configuration (metadata, guardrails, status, copy)
 docs/               Product/architecture documentation
 ```
+
+
+## City Profile Configuration
+City-specific metadata now lives in `config/cities.yml` and is loaded via `app/utils/config.py`.
+
+What is centralized per city:
+- display name and status (`live` vs `coming_soon`)
+- subtitle and Canada-page positioning copy
+- dataset path (local for now)
+- guardrail thresholds (`min_years`, `min_avg_listings`, `min_avg_coverage`)
+
+To add a new city next:
+1. Add a city entry in `config/cities.yml`.
+2. Mark it `enabled: true` and `status: live` once data is ready.
+3. Reuse `app/pages/city_overview.py` via a thin wrapper page module.
 
 ## Run Locally
 ```bash
