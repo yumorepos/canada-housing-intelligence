@@ -53,6 +53,11 @@ Implemented as analysis helpers so UI stays presentation-only:
 ### Why this helps scaling
 Adding the next city now mostly requires updating config and providing data, rather than embedding city-specific copy/thresholds in page code.
 
+
+## Runtime import behavior
+- Streamlit runs `app/main.py` and can execute files under `app/pages/` as standalone scripts in multipage mode.
+- Each executable page module includes a minimal path bootstrap to ensure repo-root modules (`app.*`, `analysis.*`) resolve consistently when launched with `streamlit run app/main.py` from repo root.
+
 ## Honest limitations
 - Dataset remains local/sample and synthetic rather than sourced from authoritative feeds.
 - Guardrails improve trustworthiness but do not make outputs statistically official.

@@ -80,10 +80,13 @@ To add a new city next:
 3. Reuse `app/pages/city_overview.py` via a thin wrapper page module.
 
 ## Run Locally
+Run from the repository root:
 ```bash
 pip install -r requirements.txt
 streamlit run app/main.py
 ```
+
+Import/runtime note: app entry scripts include a small `sys.path` bootstrap so Streamlit multipage execution can resolve both `app.*` and `analysis.*` imports reliably from root.
 
 ## Brutally Honest Limitations
 - Data is still local/sample and synthetic; this is not an official benchmark feed.
