@@ -13,10 +13,11 @@ from app.pages.city_overview import render_city_overview
 CITY_NAME = "Vancouver"
 
 
-def render_vancouver_overview(data: pd.DataFrame, profile: dict) -> None:
+def render_vancouver_overview(data: pd.DataFrame, profile: dict, provenance: dict | None = None) -> None:
     render_city_overview(
         data=data,
         city=CITY_NAME,
         subtitle=profile["subtitle"],
         guardrails=profile["guardrails"],
+        provenance=provenance,
     )

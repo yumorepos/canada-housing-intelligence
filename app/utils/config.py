@@ -23,6 +23,8 @@ def load_city_config(config_path: str = "config/cities.yml") -> dict[str, Any]:
     shared_defaults = config.get("shared_defaults", {})
     if "dataset_path" not in shared_defaults:
         raise ValueError("Config must include shared_defaults.dataset_path.")
+    if "fallback_dataset_path" not in shared_defaults:
+        raise ValueError("Config must include shared_defaults.fallback_dataset_path.")
 
     for city_name, profile in config["cities"].items():
         missing = _REQUIRED_CITY_FIELDS.difference(profile.keys())
@@ -35,6 +37,7 @@ def load_city_config(config_path: str = "config/cities.yml") -> dict[str, Any]:
 def get_city_profiles(config: dict[str, Any]) -> dict[str, dict[str, Any]]:
     shared_defaults = config.get("shared_defaults", {})
     default_dataset = shared_defaults.get("dataset_path")
+    fallback_dataset = shared_defaults.get("fallback_dataset_path")
     default_guardrails = shared_defaults.get("guardrails", {})
 
     profiles: dict[str, dict[str, Any]] = {}
@@ -45,6 +48,7 @@ def get_city_profiles(config: dict[str, Any]) -> dict[str, dict[str, Any]]:
             "status": profile["status"],
             "enabled": bool(profile["enabled"]),
             "dataset_path": profile.get("dataset_path", default_dataset),
+            "fallback_dataset_path": profile.get("fallback_dataset_path", fallback_dataset),
             "subtitle": profile["subtitle"],
             "canada_positioning": profile.get("canada_positioning"),
             "upcoming_note": profile.get("upcoming_note"),
