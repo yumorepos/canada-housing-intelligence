@@ -12,6 +12,11 @@ The app opens on a Canada comparison page, with Montreal, Toronto, and Vancouver
 - A practical **source-backed ingestion path** that still supports sample-data fallback.
 
 ## Current Product Capabilities
+
+### Interactive Map
+An interactive map showing Canadian cities with housing data, color-coded by affordability.  Click [here](map.html) to view the map.
+
+## Current Product Capabilities
 ### Canada overview (national comparison layer)
 - Decision snapshot metrics (lower-rent city, lower-price city, pressure, coverage)
 - Cross-city comparison table (rent, price, growth, affordability ratio, coverage, listing samples)
