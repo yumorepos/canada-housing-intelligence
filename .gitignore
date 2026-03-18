@@ -23,3 +23,10 @@ venv/
 
 # Streamlit
 .streamlit/secrets.toml
+
+*.pyc
+*.log
+.env
+*.egg-info/
+dist/
+build/
