@@ -1,5 +1,8 @@
 # Canada Housing Intelligence
 
+[![CI](https://github.com/yumorepos/canada-housing-intelligence/actions/workflows/ci.yml/badge.svg)](https://github.com/yumorepos/canada-housing-intelligence/actions/workflows/ci.yml)
+
+
 Canada Housing Intelligence is a recruiter-facing, local-first housing analytics product focused on making market shifts understandable in seconds.
 The app opens on a Canada comparison page, with Montreal, Toronto, and Vancouver as live city drill-downs.
 
