@@ -122,6 +122,8 @@ This repo already contains pinned runtime dependencies in `requirements.txt` and
 ### Vercel status
 - **Current recommendation:** defer/avoid Vercel for this repository in its current shape.
 - Reason: Vercel expects frontend static assets or explicit serverless API handlers, while this project is a Streamlit runtime.
+- This repo now includes `vercel.json` + `scripts/vercel-ignore-build.sh` to intentionally skip Vercel preview builds instead of pretending this is a serverless backend.
+- Maintainers should still remove/disable Vercel Git integration (or mark Vercel as non-required in branch protection) so PR mergeability does not depend on a non-canonical deploy target.
 - If Vercel is required in the future, do a **real architecture split**:
   - Frontend: React/Next.js app (UI shell)
   - Backend: FastAPI service for analytics/query endpoints
