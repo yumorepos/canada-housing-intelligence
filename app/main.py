@@ -1,4 +1,3 @@
-from datetime import UTC, datetime
 import importlib
 import sys
 from pathlib import Path
@@ -21,21 +20,13 @@ def _render_data_mode_banner(provenance: dict, max_age_days: int = 45) -> None:
         f"**Data mode:** {label} · **Source:** {provenance.get('source_name', 'unknown')} "
         f"({provenance.get('source_type', 'unknown')}) · **Period:** {provenance.get('source_period', 'unknown')}"
     )
-    processed_at_raw = provenance.get("processed_at")
-    if not processed_at_raw or processed_at_raw == "unknown":
+    freshness_status = provenance.get("freshness_status", "unknown")
+    age_days = provenance.get("data_age_days")
+    if freshness_status == "unknown" or age_days is None:
         st.warning("Freshness status unavailable: no processed_at timestamp found in current dataset.")
         return
 
-    try:
-        processed_at = datetime.fromisoformat(str(processed_at_raw).replace("Z", "+00:00"))
-        if processed_at.tzinfo is None:
-            processed_at = processed_at.replace(tzinfo=UTC)
-        age_days = (datetime.now(UTC) - processed_at).days
-    except ValueError:
-        st.warning(f"Freshness status unavailable: invalid processed_at format ({processed_at_raw}).")
-        return
-
-    if age_days > max_age_days:
+    if freshness_status == "stale":
         st.warning(
             f"Data freshness: stale ({age_days} days old). Threshold is {max_age_days} days."
         )
@@ -67,15 +58,16 @@ def main() -> None:
     implemented_profiles, upcoming_profiles = get_profiled_cities(config)
 
     defaults = config["shared_defaults"]
+    freshness_max_age_days = int(defaults.get("freshness", {}).get("max_age_days", 45))
     data, provenance = load_housing_dataset(
         dataset_path=defaults["dataset_path"],
         fallback_path=defaults["fallback_dataset_path"],
+        max_age_days=freshness_max_age_days,
     )
 
     implemented_names = [profile["city"] for profile in implemented_profiles]
     upcoming_names = [profile["city"] for profile in upcoming_profiles]
 
-    freshness_max_age_days = int(defaults.get("freshness", {}).get("max_age_days", 45))
     _render_data_mode_banner(provenance, max_age_days=freshness_max_age_days)
 
     st.caption(

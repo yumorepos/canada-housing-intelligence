@@ -109,9 +109,9 @@ streamlit run app/main.py
 - Core required analysis schema is enforced during ingestion and cleaning (`city`, `neighborhood`, `year`, `average_rent`, `median_price`).
 
 ### What is explicitly not guaranteed today
-- No automated freshness SLA checks or stale-data alerting.
-- No formal external schema registry / versioned data contract file.
-- No cryptographic lineage chain (raw file hash -> processed file hash -> run manifest).
+- No automated source ingestion/orchestration from external providers.
+- No formal external schema registry service (contract is repo-local YAML).
+- No external provenance registry (lineage manifests are local repository artifacts).
 - No claim of benchmark-grade or causal statistical certainty; insights remain directional.
 
 ## Recommended Next Highest-Leverage Step

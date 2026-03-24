@@ -71,7 +71,7 @@ UI now adds provenance context (mode/source/period), coverage/confidence notes, 
 ### Claim: "Local-first source-backed workflow exists"
 - **Implemented by:** `scripts/process_housing_raw.py`, `app/utils/ingestion.py`, `app/utils/data_loader.py`
 - **What is actually enforced:** required ingestion columns, processed output writing, fallback to sample if primary processed file is missing.
-- **Non-guarantees:** no automated orchestration/scheduling; no freshness SLA monitor.
+- **Non-guarantees:** no automated external source ingestion/orchestration.
 
 ### Claim: "Trust/provenance context is surfaced"
 - **Implemented by:** provenance columns in processed data and UI captions in app pages.

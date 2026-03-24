@@ -2,11 +2,18 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
 import pandas as pd
 import yaml
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from app.utils.ingestion import validate_raw_data_contract
 
 
 def _parse_args() -> argparse.Namespace:
@@ -31,8 +38,6 @@ def main() -> None:
     defaults = config.get("shared_defaults", {})
     dataset_path = args.dataset or defaults.get("dataset_path")
     max_age_days = int(defaults.get("freshness", {}).get("max_age_days", 45))
-    required_columns = set((contract.get("required_columns") or {}).keys())
-
     result: dict[str, object] = {
         "checked_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "dataset_path": dataset_path,
@@ -46,10 +51,11 @@ def main() -> None:
         result["errors"] = ["dataset_missing"]
     else:
         data = pd.read_csv(dataset_path)
-        missing_columns = sorted(required_columns.difference(data.columns))
-        if missing_columns:
+        try:
+            validate_raw_data_contract(data, contract)
+        except ValueError as exc:
             result["status"] = "fail"
-            result["errors"] = [f"missing_required_columns:{','.join(missing_columns)}"]
+            result["errors"] = [f"contract_validation_failed:{exc}"]
         else:
             processed_at = None
             if "processed_at" in data.columns:

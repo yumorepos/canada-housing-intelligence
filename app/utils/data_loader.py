@@ -42,7 +42,12 @@ def _extract_provenance(data: pd.DataFrame) -> dict:
     }
 
 
-def load_housing_dataset(dataset_path: str, fallback_path: str | None = None) -> tuple[pd.DataFrame, dict]:
+def load_housing_dataset(
+    dataset_path: str,
+    fallback_path: str | None = None,
+    *,
+    max_age_days: int = 45,
+) -> tuple[pd.DataFrame, dict]:
     """Load housing data with optional fallback and return provenance metadata."""
     primary_path = Path(dataset_path)
     selected_path = primary_path
@@ -65,7 +70,6 @@ def load_housing_dataset(dataset_path: str, fallback_path: str | None = None) ->
         provenance["data_mode"] = "sample"
 
     processed_at_raw = provenance.get("processed_at")
-    max_age_days = 45
     try:
         processed_at = datetime.fromisoformat(str(processed_at_raw).replace("Z", "+00:00"))
         if processed_at.tzinfo is None:

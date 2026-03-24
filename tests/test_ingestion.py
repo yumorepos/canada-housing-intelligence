@@ -155,3 +155,22 @@ def test_load_housing_dataset_marks_stale_when_processed_at_old(tmp_path: Path):
 
     assert provenance["freshness_status"] == "stale"
     assert provenance["data_age_days"] > 45
+
+
+def test_load_housing_dataset_respects_custom_max_age_days(tmp_path: Path):
+    fallback = tmp_path / "fallback.csv"
+    pd.DataFrame(
+        {
+            "city": ["Toronto"],
+            "neighborhood": ["Downtown"],
+            "year": [2024],
+            "average_rent": [2500],
+            "median_price": [950000],
+            "processed_at": ["2026-03-01T00:00:00+00:00"],
+        }
+    ).to_csv(fallback, index=False)
+
+    _, provenance = load_housing_dataset("missing.csv", fallback_path=str(fallback), max_age_days=10)
+
+    assert provenance["freshness_status"] == "stale"
+    assert provenance["data_age_days"] >= 20
