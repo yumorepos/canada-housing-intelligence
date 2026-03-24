@@ -112,9 +112,11 @@ def test_neighborhood_growth_rankings_respect_robustness_thresholds():
     summary = leader_laggard_summary(rankings, "rent_growth_pct", robust_only=True)
     coverage_summary = ranking_coverage_summary(rankings)
 
-    assert set(["support_tier", "is_robust", "avg_coverage"]).issubset(rankings.columns)
+    assert set(["support_tier", "support_score", "reliability_label", "is_robust", "avg_coverage"]).issubset(rankings.columns)
     assert rankings.loc[rankings["neighborhood"] == "A", "is_robust"].iloc[0]
     assert not rankings.loc[rankings["neighborhood"] == "B", "is_robust"].iloc[0]
+    assert rankings["support_score"].between(0, 100).all()
+    assert set(rankings["reliability_label"]).issubset({"low", "medium", "high"})
     assert summary["leader"][0] == "A"
     assert summary["laggard"][0] == "A"
     assert coverage_summary == {"total": 2, "robust": 1, "directional": 1}

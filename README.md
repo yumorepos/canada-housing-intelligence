@@ -53,7 +53,8 @@ If the primary source-backed processed file is missing, the app automatically fa
    streamlit run app/main.py
    ```
 
-Transformation logic is in `app/utils/ingestion.py` and validates required columns before writing app-compatible output.
+Transformation logic is in `app/utils/ingestion.py` and validates raw inputs against `config/data_contract.yml` before writing app-compatible output.
+Each ingestion run also writes a lineage manifest with input/output hashes and run metadata (default under `data/processed/manifests/`).
 
 ## Provenance fields
 Processed rows can include:
@@ -89,11 +90,46 @@ pip install -r requirements.txt
 streamlit run app/main.py
 ```
 
+## Demo Walkthrough
+- Use `docs/demo_playbook.md` for a repeatable recruiter-facing flow with trust-first callouts.
+- Screenshot/GIF capture for trust-aware UI states is currently tracked as a manual follow-up task (blocked in this non-browser execution environment).
+
 ## Brutally Honest Limitations
 - This is still a local workflow with manual file drops, not a production data pipeline.
 - Source-backed mode is only as credible as the raw files you provide.
-- There is no automated freshness monitor or schema registry.
+- Freshness is shown in-app from `processed_at`, but no automated scheduler updates source files.
+- There is no external schema registry (the contract is local to this repo).
 - Cross-city comparisons remain directional and should not be presented as official benchmark quality.
 
+## Truth Map: Current Guarantees vs Non-Guarantees
+### What is guaranteed today
+- CI now fails the build if dependency install, bytecode compilation, or tests fail.
+- Core local workflow is stable: raw CSV -> `scripts/process_housing_raw.py` -> processed CSV -> Streamlit app.
+- Fallback behavior is explicit: if source-backed processed data is missing, app reads sample data.
+- Core required analysis schema is enforced during ingestion and cleaning (`city`, `neighborhood`, `year`, `average_rent`, `median_price`).
+
+### What is explicitly not guaranteed today
+- No automated freshness SLA checks or stale-data alerting.
+- No formal external schema registry / versioned data contract file.
+- No cryptographic lineage chain (raw file hash -> processed file hash -> run manifest).
+- No claim of benchmark-grade or causal statistical certainty; insights remain directional.
+
 ## Recommended Next Highest-Leverage Step
-Add a lightweight `data/sources.yml` manifest (source descriptions + expected columns + update cadence) and validate raw files against it during ingestion to improve repeatability without adding infrastructure.
+Add a lightweight `config/sources.yml` manifest (source descriptions + update cadence) and enforce source-level cadence checks in CI for stronger trust without heavy infrastructure.
+
+## Quality Gates (CI)
+Current CI enforces:
+- bytecode compile checks (`python -m compileall app analysis scripts tests`)
+- lint (`ruff check app analysis scripts tests`)
+- type checks (`mypy app analysis scripts`)
+- tests (`pytest -q`)
+
+Coverage threshold gating is planned but not yet enforced in this repository.
+
+## Data Health Workflow
+- `.github/workflows/data-health.yml` runs on a weekly schedule and manual dispatch.
+- It executes `scripts/data_health_check.py`, validates freshness + required columns, and uploads `artifacts/data_health_report.json`.
+
+## Dependency Locking
+- `requirements.txt` is pinned to exact versions used by CI.
+- `requirements-lock.txt` mirrors the pinned runtime/tooling set for deterministic setup.

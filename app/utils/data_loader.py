@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pandas as pd
@@ -62,6 +63,20 @@ def load_housing_dataset(dataset_path: str, fallback_path: str | None = None) ->
 
     if selected_path != primary_path and provenance["data_mode"] == "source_backed":
         provenance["data_mode"] = "sample"
+
+    processed_at_raw = provenance.get("processed_at")
+    max_age_days = 45
+    try:
+        processed_at = datetime.fromisoformat(str(processed_at_raw).replace("Z", "+00:00"))
+        if processed_at.tzinfo is None:
+            processed_at = processed_at.replace(tzinfo=UTC)
+        age_days = (datetime.now(UTC) - processed_at).days
+        is_stale = age_days > max_age_days
+        provenance["data_age_days"] = int(age_days)
+        provenance["freshness_status"] = "stale" if is_stale else "fresh"
+    except Exception:
+        provenance["data_age_days"] = None
+        provenance["freshness_status"] = "unknown"
 
     return cleaned, provenance
 

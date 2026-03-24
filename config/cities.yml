@@ -2,6 +2,8 @@ primary_experience: canada_overview
 shared_defaults:
   dataset_path: data/processed/housing_source_processed.csv
   fallback_dataset_path: data/processed/housing_sample.csv
+  freshness:
+    max_age_days: 45
   guardrails:
     min_years: 6
     min_avg_listings: 150

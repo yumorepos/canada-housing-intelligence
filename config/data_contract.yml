@@ -1,0 +1,41 @@
+version: 1
+description: Canonical raw housing CSV contract for local ingestion.
+
+required_columns:
+  city:
+    type: string
+    allow_empty: false
+  neighborhood:
+    type: string
+    allow_empty: false
+  year:
+    type: integer
+    min: 1900
+    max: 2100
+  average_rent:
+    type: number
+    min: 0
+  median_price:
+    type: number
+    min: 0
+
+optional_columns:
+  borough:
+    type: string
+    default: Unknown
+  listing_count:
+    type: integer
+    default: 0
+    min: 0
+  sales_count:
+    type: integer
+    default: 0
+    min: 0
+  coverage_score:
+    type: number
+    default: 0.6
+    min: 0
+    max: 1
+  property_type:
+    type: string
+    default: all
