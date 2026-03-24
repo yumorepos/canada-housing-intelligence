@@ -163,7 +163,7 @@ Current CI enforces:
 - type checks (`mypy app analysis scripts`)
 - tests (`pytest -q`)
 
-Coverage threshold gating is planned but not yet enforced in this repository.
+Coverage threshold gating is enforced via `python scripts/coverage_gate.py --min-coverage 0.50 --targets app analysis scripts -- -q` in local and CI runs.
 
 ## Data Health Workflow
 - `.github/workflows/data-health.yml` runs on a weekly schedule and manual dispatch.
