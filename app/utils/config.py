@@ -39,6 +39,7 @@ def get_city_profiles(config: dict[str, Any]) -> dict[str, dict[str, Any]]:
     default_dataset = shared_defaults.get("dataset_path")
     fallback_dataset = shared_defaults.get("fallback_dataset_path")
     default_guardrails = shared_defaults.get("guardrails", {})
+    freshness_defaults = shared_defaults.get("freshness", {})
 
     profiles: dict[str, dict[str, Any]] = {}
     for city_name, profile in config["cities"].items():
@@ -61,6 +62,9 @@ def get_city_profiles(config: dict[str, Any]) -> dict[str, dict[str, Any]]:
                 "min_avg_coverage": float(
                     profile.get("guardrails", {}).get("min_avg_coverage", default_guardrails.get("min_avg_coverage", 0.72))
                 ),
+            },
+            "freshness": {
+                "max_age_days": int(profile.get("freshness", {}).get("max_age_days", freshness_defaults.get("max_age_days", 45)))
             },
         }
         profiles[city_name] = merged

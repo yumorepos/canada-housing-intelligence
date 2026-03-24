@@ -128,6 +128,8 @@ def neighborhood_growth_rankings(
                 "avg_listings",
                 "avg_coverage",
                 "support_tier",
+                "support_score",
+                "reliability_label",
                 "is_robust",
             ]
         )
@@ -166,6 +168,16 @@ def neighborhood_growth_rankings(
         & (ranked["avg_coverage"] >= min_avg_coverage)
     )
     ranked["support_tier"] = ranked["is_robust"].map({True: "robust", False: "directional"})
+    ranked["support_score"] = (
+        (ranked["years_observed"] / max(min_years, 1)).clip(upper=1.0) * 40
+        + (ranked["avg_listings"] / max(min_avg_listings, 1)).clip(upper=1.0) * 30
+        + (ranked["avg_coverage"] / max(min_avg_coverage, 0.01)).clip(upper=1.0) * 30
+    ).round(1)
+    ranked["reliability_label"] = pd.cut(
+        ranked["support_score"],
+        bins=[-0.1, 50, 75, 100],
+        labels=["low", "medium", "high"],
+    ).astype(str)
 
     return ranked[
         [
@@ -180,6 +192,8 @@ def neighborhood_growth_rankings(
             "avg_listings",
             "avg_coverage",
             "support_tier",
+            "support_score",
+            "reliability_label",
             "is_robust",
         ]
     ].sort_values("rent_growth_pct", ascending=False)

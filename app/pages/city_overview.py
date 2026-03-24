@@ -72,11 +72,22 @@ def render_city_overview(
         f"avg coverage score **{kpis['latest_avg_coverage_pct']:.1f}%**. "
         f"Source: **{provenance.get('source_name', 'local sample dataset')}** ({provenance.get('source_type', 'sample')})."
     )
+    st.caption(
+        f"Coverage note: {provenance.get('coverage_note', 'Coverage guidance not available.')} · "
+        f"Confidence note: {provenance.get('confidence_note', 'Confidence guidance not available.')}"
+    )
 
     st.caption(
         "Neighborhood ranking guardrails: min 6 years, avg listings >= 150, avg coverage >= 0.72. "
         f"Robust neighborhoods: **{coverage['robust']} / {coverage['total']}** (directional: {coverage['directional']})."
     )
+    if not rankings.empty:
+        avg_support = rankings["support_score"].mean()
+        high_support = int((rankings["reliability_label"] == "high").sum())
+        st.caption(
+            f"Support scoring: mean support score **{avg_support:.1f}/100**; "
+            f"high-reliability neighborhoods: **{high_support}/{len(rankings)}**."
+        )
 
     st.subheader("Market Trajectory")
     trend_left, trend_right = st.columns(2)
@@ -102,11 +113,11 @@ def render_city_overview(
         st.caption(_leader_caption(rent_leaders, "Rent growth"))
 
     with g2:
-        st.markdown("**Price Growth Leaders vs Laggards**")
+        st.markdown("**Price Growth Leaders vs Laggards + Reliability**")
         if robust_rankings.empty:
             st.warning("No neighborhoods met robustness thresholds for price growth ranking.")
         else:
-            price_view = robust_rankings[["neighborhood", "price_growth_pct"]].set_index("neighborhood")
+            price_view = robust_rankings[["neighborhood", "price_growth_pct", "support_score"]].set_index("neighborhood")
             st.bar_chart(price_view)
         st.caption(_leader_caption(price_leaders, "Price growth"))
 
@@ -138,11 +149,13 @@ def render_city_overview(
     if robust_rankings.empty:
         st.markdown(
             "- Robust ranking signals are unavailable with current thresholds; use directional values cautiously.\n"
-            f"- Latest city sample coverage remains moderate at **{kpis['latest_avg_coverage_pct']:.1f}%**."
+            f"- Latest city sample coverage remains moderate at **{kpis['latest_avg_coverage_pct']:.1f}%**.\n"
+            f"- Last processing timestamp: **{provenance.get('processed_at', 'unknown')}**."
         )
     else:
         stable_rent = robust_rankings.sort_values("rent_volatility_pct").iloc[0]
         volatile_rent = robust_rankings.sort_values("rent_volatility_pct", ascending=False).iloc[0]
+        avg_support = robust_rankings["support_score"].mean()
         st.markdown(
             "\n".join(
                 [
@@ -150,9 +163,11 @@ def render_city_overview(
                     f"a **{kpis['ratio_change_bps']:.0f} bps** move from period start.",
                     f"- **Momentum split (robust sample):** rent growth ranges from **{rent_leaders['laggard'][1]:.1f}%** "
                     f"to **{rent_leaders['leader'][1]:.1f}%**.",
+                    f"- **Support confidence:** robust sample mean support score is **{avg_support:.1f}/100**.",
                     f"- **Stability signal:** **{stable_rent['neighborhood']}** is steadiest "
                     f"(volatility {stable_rent['rent_volatility_pct']:.2f}%), while **{volatile_rent['neighborhood']}** is most variable "
                     f"({volatile_rent['rent_volatility_pct']:.2f}%).",
+                    f"- **Recency context:** processed at **{provenance.get('processed_at', 'unknown')}**.",
                 ]
             )
         )

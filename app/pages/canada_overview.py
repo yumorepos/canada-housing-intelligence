@@ -123,6 +123,9 @@ def render_canada_overview(
         "is building faster.\n"
         f"- **Data provenance:** source is **{provenance.get('source_name', 'unknown')}** "
         f"({provenance.get('source_type', 'unknown')}) for period **{provenance.get('source_period', 'unknown')}**.\n"
+        f"- **Recency context:** processed at **{provenance.get('processed_at', 'unknown')}**.\n"
+        f"- **Coverage note:** {provenance.get('coverage_note', 'Coverage guidance not available.')}\n"
+        f"- **Confidence note:** {provenance.get('confidence_note', 'Confidence guidance not available.')}\n"
         "- **Honest scope:** This remains a local-first intelligence layer with support and coverage guardrails, not an "
         "authoritative national benchmark feed."
     )
