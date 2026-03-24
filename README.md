@@ -2,9 +2,14 @@
 
 [![CI](https://github.com/yumorepos/canada-housing-intelligence/actions/workflows/ci.yml/badge.svg)](https://github.com/yumorepos/canada-housing-intelligence/actions/workflows/ci.yml)
 
-
 Canada Housing Intelligence is a recruiter-facing, local-first housing analytics product focused on making market shifts understandable in seconds.
 The app opens on a Canada comparison page, with Montreal, Toronto, and Vancouver as live city drill-downs.
+
+## Truth-First Architecture Verdict
+- **Current runtime:** Streamlit application.
+- **Entrypoint:** `app/main.py` (run with `streamlit run app/main.py`).
+- **Deployment reality:** best-fit hosting is **Streamlit Community Cloud**.
+- **What this is not:** this repo is not currently a FastAPI/Flask backend or static frontend bundle.
 
 ## What This Repository Is
 - A **local-first** analytics foundation that runs without external infrastructure.
@@ -14,9 +19,8 @@ The app opens on a Canada comparison page, with Montreal, Toronto, and Vancouver
 ## Current Product Capabilities
 
 ### Interactive Map
-An interactive map showing Canadian cities with housing data, color-coded by affordability.  Click [here](map.html) to view the map.
+An interactive map showing Canadian cities with housing data, color-coded by affordability. Click [here](map.html) to view the map.
 
-## Current Product Capabilities
 ### Canada overview (national comparison layer)
 - Decision snapshot metrics (lower-rent city, lower-price city, pressure, coverage)
 - Cross-city comparison table (rent, price, growth, affordability ratio, coverage, listing samples)
@@ -86,9 +90,42 @@ config/             City profile configuration
 ## Run Locally
 Run from the repository root:
 ```bash
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 streamlit run app/main.py
 ```
+
+## Deployment (Truthful / Lowest Friction)
+
+### Recommended platform: Streamlit Community Cloud
+Deploy this repository as a Streamlit app using:
+- **Repository:** `yumorepos/canada-housing-intelligence`
+- **Branch:** your desired deploy branch (for example `main`)
+- **Main file path:** `app/main.py`
+- **Python version:** 3.12
+
+This repo already contains pinned runtime dependencies in `requirements.txt` and Streamlit runtime config in `.streamlit/config.toml`.
+
+### Exact deploy steps
+1. Push your branch to GitHub.
+2. Go to Streamlit Community Cloud and create a **New app**.
+3. Select this repo and branch.
+4. Set **Main file path** to `app/main.py`.
+5. Deploy.
+6. After the first boot, verify that the app opens on **Canada Overview** and that provenance mode renders in the header.
+
+### Runtime notes
+- Streamlit Cloud runs this app in headless mode.
+- The app will run even if source-backed processed data is absent; it falls back to `data/processed/housing_sample.csv`.
+- If you need custom secrets later, add them via the Streamlit Cloud secrets manager (do not commit secrets).
+
+### Vercel status
+- **Current recommendation:** defer/avoid Vercel for this repository in its current shape.
+- Reason: Vercel expects frontend static assets or explicit serverless API handlers, while this project is a Streamlit runtime.
+- If Vercel is required in the future, do a **real architecture split**:
+  - Frontend: React/Next.js app (UI shell)
+  - Backend: FastAPI service for analytics/query endpoints
+  - Data pipeline: scheduled ingestion + validated processed artifacts
 
 ## Demo Walkthrough
 - Use `docs/demo_playbook.md` for a repeatable recruiter-facing flow with trust-first callouts.
@@ -103,7 +140,7 @@ streamlit run app/main.py
 
 ## Truth Map: Current Guarantees vs Non-Guarantees
 ### What is guaranteed today
-- CI now fails the build if dependency install, bytecode compilation, or tests fail.
+- CI fails the build if dependency install, bytecode compilation, linting, type checks, or tests fail.
 - Core local workflow is stable: raw CSV -> `scripts/process_housing_raw.py` -> processed CSV -> Streamlit app.
 - Fallback behavior is explicit: if source-backed processed data is missing, app reads sample data.
 - Core required analysis schema is enforced during ingestion and cleaning (`city`, `neighborhood`, `year`, `average_rent`, `median_price`).
