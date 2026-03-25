@@ -154,7 +154,7 @@ This repo already contains pinned runtime dependencies in `requirements.txt` and
 - No claim of benchmark-grade or causal statistical certainty; insights remain directional.
 
 ## Recommended Next Highest-Leverage Step
-Add a lightweight `config/sources.yml` manifest (source descriptions + update cadence) and enforce source-level cadence checks in CI for stronger trust without heavy infrastructure.
+Add integration tests that exercise Streamlit trust surfaces end-to-end and incrementally raise the coverage threshold as those tests expand.
 
 ## Quality Gates (CI)
 Current CI enforces:
@@ -163,11 +163,12 @@ Current CI enforces:
 - type checks (`mypy app analysis scripts`)
 - tests (`pytest -q`)
 
-Coverage threshold gating is planned but not yet enforced in this repository.
+Coverage threshold gating is enforced via `python scripts/coverage_gate.py --min-coverage 0.50 --targets app analysis scripts -- -q` in local and CI runs.
+For one-command local verification from a clean checkout, run `./scripts/smoke_validate.sh`.
 
 ## Data Health Workflow
 - `.github/workflows/data-health.yml` runs on a weekly schedule and manual dispatch.
-- It executes `scripts/data_health_check.py`, validates freshness + required columns, and uploads `artifacts/data_health_report.json`.
+- It executes `scripts/data_health_check.py` with config + contract + sources manifest (`config/sources.yml`) and uploads `artifacts/data_health_report.json`.
 
 ## Dependency Locking
 - `requirements.txt` is pinned to exact versions used by CI.

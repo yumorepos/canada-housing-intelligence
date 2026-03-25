@@ -1,0 +1,7 @@
+version: 1
+sources:
+  - name: Local CMHC/municipal compiled extract (manual drop)
+    type: manual_csv_drop
+    expected_period: 2016-2023
+    cadence_max_age_days: 45
+    confidence_note: Directional city intelligence only; not an authoritative benchmark feed.

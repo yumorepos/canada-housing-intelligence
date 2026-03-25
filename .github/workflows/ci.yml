@@ -15,3 +15,4 @@ jobs:
           ruff check app analysis scripts tests
           mypy app analysis scripts
           pytest -q
+          python scripts/coverage_gate.py --min-coverage 0.50 --targets app analysis scripts -- -q
