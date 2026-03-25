@@ -164,6 +164,7 @@ Current CI enforces:
 - tests (`pytest -q`)
 
 Coverage threshold gating is enforced via `python scripts/coverage_gate.py --min-coverage 0.50 --targets app analysis scripts -- -q` in local and CI runs.
+For one-command local verification from a clean checkout, run `./scripts/smoke_validate.sh`.
 
 ## Data Health Workflow
 - `.github/workflows/data-health.yml` runs on a weekly schedule and manual dispatch.
