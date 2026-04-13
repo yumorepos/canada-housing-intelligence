@@ -32,3 +32,10 @@ dist/
 build/
 # Generated reports
 artifacts/
+.env.*
+!.env.example
+*.db
+*.sqlite3
+*.bak
+*.backup
+*.old
